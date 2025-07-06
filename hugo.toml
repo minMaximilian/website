@@ -5,6 +5,7 @@ enableRobotsTXT = true
 
 [params]
   description = 'Personal website and blog of a passionate developer exploring technology, programming, and innovation'
+  email = 'admin@odetothegiants.com'
 
 [caches]
   [caches.images]

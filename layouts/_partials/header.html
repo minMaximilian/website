@@ -1,2 +1,7 @@
-<h1>{{ site.Title }}</h1>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h1>{{ site.Title }}</h1>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon"></span>
+    </button>
+</div>
 {{ partial "menu.html" (dict "menuID" "main" "page" .) }}

@@ -1,8 +1,8 @@
-{{- with resources.Get "js/main.js" }}
+{{- with resources.Get "js/series-filter.js" }}
 {{- $opts := dict
 "minify" (not hugo.IsDevelopment)
 "sourceMap" (cond hugo.IsDevelopment "external" "")
-"targetPath" "js/main.js"
+"targetPath" "js/series-filter.js"
 }}
 {{- with . | js.Build $opts }}
 {{- if hugo.IsDevelopment }}
@@ -15,11 +15,11 @@
 {{- end }}
 {{- end }}
 
-{{- with resources.Get "js/series-filter.js" }}
+{{- with resources.Get "js/theme-toggle.js" }}
 {{- $opts := dict
 "minify" (not hugo.IsDevelopment)
 "sourceMap" (cond hugo.IsDevelopment "external" "")
-"targetPath" "js/series-filter.js"
+"targetPath" "js/theme-toggle.js"
 }}
 {{- with . | js.Build $opts }}
 {{- if hugo.IsDevelopment }}

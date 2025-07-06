@@ -5,8 +5,4 @@ draft = false
 description = 'Curated collection of articles, papers, and resources organized by category. A personal knowledge base of valuable content.'
 +++
 
-# References
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. This is my curated collection of articles, papers, and resources that I find valuable. Organized by category for easy browsing.
-
-Click on a category to view all links in that section. 
+Articles, resources and papers I find valuable. These aren't endorsements
