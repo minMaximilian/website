@@ -1,8 +1,88 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  {{ range .Pages }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-    {{ .Summary }}
+{{ .Content }}
+
+{{ if eq .Section "references" }}
+{{ range $category, $links := site.Data.references }}
+<h2 id="{{ $category }}">{{ $category | upper }}</h2>
+<div class="references-section">
+  {{ range $title, $url := $links }}
+  <p class="link">
+    <b><a target="_blank" href="{{ $url }}">{{ $title }}</a></b>
+    <a target="_blank" class="a-low" href="https://web.archive.org/web/{{ $url }}">[archive]</a>
+    <a target="_blank" class="a-low"
+      href="https://hn.algolia.com/?dateRange=all&page=0&prefix=false&sort=byPopularity&type=story&query={{ $url | urlquery }}">[hn]</a>
+    <a target="_blank" class="a-low" href="https://www.reddit.com/search/?q=url%3A{{ $url | urlquery }}">[reddit]</a>
+    <br />
+    <span style="font-size: 14px">{{ $url }}</span>
+  </p>
   {{ end }}
+</div>
+{{ end }}
+{{ else if eq .Section "posts" }}
+{{/* Get all unique series */}}
+{{ $allSeries := slice }}
+{{ range .Pages }}
+{{ if .Params.series }}
+{{ $allSeries = $allSeries | append .Params.series }}
+{{ end }}
+{{ end }}
+{{ $uniqueSeries := $allSeries | uniq }}
+
+{{/* Series filter */}}
+{{ if gt (len $uniqueSeries) 0 }}
+<div class="series-filter">
+  <h3>Filter by Series:</h3>
+  <div class="series-buttons">
+    <button class="series-btn active" data-series="all">All Posts</button>
+    {{ range $uniqueSeries }}
+    <button class="series-btn" data-series="{{ . }}">{{ . | title }}</button>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{/* Paginated posts */}}
+{{ $paginator := .Paginate .Pages 5 }}
+{{ range $paginator.Pages }}
+<article class="post-preview" data-series="{{ .Params.series | default " none" }}">
+  <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+  <p class="post-meta">
+    {{ .Date.Format "January 2, 2006" }}
+    {{ if .Params.series }}
+    <span class="series-label">Series: {{ .Params.series | title }}</span>
+    {{ end }}
+  </p>
+  <p>{{ .Content | plainify | truncate 100 }}...</p>
+  <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+</article>
+{{ end }}
+
+{{/* Pagination */}}
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination">
+  {{ if $paginator.HasPrev }}
+  <a href="{{ $paginator.Prev.URL }}" class="pagination-prev">← Previous</a>
+  {{ end }}
+
+  <span class="pagination-numbers">
+    {{ range $paginator.Pagers }}
+    {{ if eq . $paginator }}
+    <span class="pagination-current">{{ .PageNumber }}</span>
+    {{ else }}
+    <a href="{{ .URL }}" class="pagination-number">{{ .PageNumber }}</a>
+    {{ end }}
+    {{ end }}
+  </span>
+
+  {{ if $paginator.HasNext }}
+  <a href="{{ $paginator.Next.URL }}" class="pagination-next">Next →</a>
+  {{ end }}
+</nav>
+{{ end }}
+{{ else }}
+{{ range .Pages }}
+<h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+{{ .Summary }}
+{{ end }}
+{{ end }}
 {{ end }}

@@ -1,0 +1,12 @@
+# Add your references here in the format:
+# category:
+#   "Article Title": "https://example.com/article"
+#   "Another Article": "https://example.com/another"
+#
+# Example:
+# cpu:
+#   "CPU Performance Guide": "https://example.com"
+# prog:
+#   "Programming Tutorial": "https://example.com" 
+cpu:
+  "Another Article": "https://example.com"

@@ -1,0 +1,8 @@
+{{- $category := .Get 0 -}}
+{{- $title := .Get 1 -}}
+{{- $url := index (index site.Data.references $category) $title -}}
+{{- if $url -}}
+<a href="{{ $url }}" target="_blank" rel="noopener">{{ $title }}</a>
+{{- else -}}
+[Reference not found: {{ $category }}/{{ $title }}]
+{{- end -}}

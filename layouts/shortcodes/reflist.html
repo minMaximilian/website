@@ -1,0 +1,21 @@
+{{- $category := .Get 0 -}}
+{{- $links := index site.Data.references $category -}}
+{{- if $links -}}
+<div class="references-section">
+    <h3>{{ $category | upper }} References</h3>
+    {{- range $title, $url := $links -}}
+    <p class="link">
+        <b><a target="_blank" href="{{ $url }}">{{ $title }}</a></b>
+        <a target="_blank" class="a-low" href="https://web.archive.org/web/{{ $url }}">[archive]</a>
+        <a target="_blank" class="a-low"
+            href="https://hn.algolia.com/?dateRange=all&page=0&prefix=false&sort=byPopularity&type=story&query={{ $url | urlquery }}">[hn]</a>
+        <a target="_blank" class="a-low"
+            href="https://www.reddit.com/search/?q=url%3A{{ $url | urlquery }}">[reddit]</a>
+        <br />
+        <span style="font-size: 14px">{{ $url }}</span>
+    </p>
+    {{- end -}}
+</div>
+{{- else -}}
+[Category not found: {{ $category }}]
+{{- end -}}
