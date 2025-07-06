@@ -2,6 +2,7 @@
 date = '2025-07-06T00:44:14+01:00'
 draft = true
 title = 'My First Post'
+tags = ['meta']
 +++
 
 This is **bold** text, and this is *emphasized* text.
