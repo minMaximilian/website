@@ -2,7 +2,6 @@
 <meta name="viewport" content="width=device-width">
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
 
-{{/* Meta description */}}
 {{ if .Description }}
 <meta name="description" content="{{ .Description }}">
 {{ else if .Summary }}
@@ -13,7 +12,6 @@
 <meta name="description" content="{{ .Title }} - {{ site.Title }}">
 {{ end }}
 
-{{/* OpenGraph tags */}}
 <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
@@ -23,7 +21,6 @@
 <meta property="og:description" content="{{ .Summary | plainify | truncate 160 }}">
 {{ end }}
 
-{{/* Twitter Card tags */}}
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
 {{ if .Description }}
@@ -32,7 +29,6 @@
 <meta name="twitter:description" content="{{ .Summary | plainify | truncate 160 }}">
 {{ end }}
 
-{{/* RSS feeds */}}
 {{ range .AlternativeOutputFormats -}}
 {{ printf `
 <link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}

@@ -3,7 +3,6 @@ languageCode = 'en-us'
 title = 'Ode to the Giants'
 enableRobotsTXT = true
 
-# Enable RSS feeds
 disableRSS = false
 disableKinds = []
 

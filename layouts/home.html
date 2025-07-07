@@ -1,25 +1,17 @@
-{{ define "main" }}
-{{ .Content }}
-
-{{/* Show recent posts preview */}}
-{{ $posts := where site.RegularPages "Section" "posts" }}
-{{ if $posts }}
+{{ define "main" }} {{ .Content }} {{ $posts
+:= where site.RegularPages "Section" "posts" }} {{ if $posts }}
 <h2>Latest Post</h2>
 {{ range first 1 $posts }}
 <article class="post-preview">
   <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
   <p class="post-meta">
-    {{ .Date.Format "January 2, 2006" }}
-    {{ if .Params.series }}
+    {{ .Date.Format "January 2, 2006" }} {{ if .Params.series }}
     <span class="series-label">Series: {{ .Params.series | title }}</span>
     {{ end }}
   </p>
   <p>{{ .Content | plainify | truncate 100 }}...</p>
   <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
 </article>
-{{ end }}
-{{ if gt (len $posts) 1 }}
+{{ end }} {{ if gt (len $posts) 1 }}
 <p><a href="/posts/" class="view-all">View all posts →</a></p>
-{{ end }}
-{{ end }}
-{{ end }}
+{{ end }} {{ end }} {{ end }}

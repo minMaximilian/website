@@ -6,7 +6,8 @@ description = 'Personal hobby website of a programmer exploring technology. Coll
 +++
 
 Hi, I am Max, a software engineer in Ireland. I currently work as a Data Privacy Engineer at [Hubspot](https://www.hubspot.com/). I helped ship:
-- [Sensitive Data](https://knowledge.hubspot.com/properties/store-sensitive-data) 
+
+- [Sensitive Data](https://knowledge.hubspot.com/properties/store-sensitive-data)
 - [Privacy Pages and Management](https://knowledge.hubspot.com/privacy-and-consent/manage-data-privacy-requests)
 
 I write about things that interest me here, website's manifesto can be seen in the first [blog](posts/ode-to-the-giants).

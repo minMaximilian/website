@@ -19,7 +19,6 @@
 </div>
 {{ end }}
 {{ else if eq .Section "posts" }}
-{{/* Get all unique series */}}
 {{ $allSeries := slice }}
 {{ range .Pages }}
 {{ if .Params.series }}
@@ -28,7 +27,6 @@
 {{ end }}
 {{ $uniqueSeries := $allSeries | uniq }}
 
-{{/* Series filter */}}
 {{ if gt (len $uniqueSeries) 0 }}
 <div class="series-filter">
   <h3>Filter by Series:</h3>
@@ -41,7 +39,6 @@
 </div>
 {{ end }}
 
-{{/* Paginated posts */}}
 {{ $paginator := .Paginate .Pages 5 }}
 {{ range $paginator.Pages }}
 <article class="post-preview" data-series="{{ .Params.series | default " none" }}">
@@ -57,7 +54,6 @@
 </article>
 {{ end }}
 
-{{/* Pagination */}}
 {{ if gt $paginator.TotalPages 1 }}
 <nav class="pagination">
   {{ if $paginator.HasPrev }}
