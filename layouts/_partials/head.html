@@ -32,5 +32,11 @@
 <meta name="twitter:description" content="{{ .Summary | plainify | truncate 160 }}">
 {{ end }}
 
+{{/* RSS feeds */}}
+{{ range .AlternativeOutputFormats -}}
+{{ printf `
+<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
+{{ end -}}
+
 {{ partialCached "head/css.html" . }}
 {{ partialCached "head/js.html" . }}

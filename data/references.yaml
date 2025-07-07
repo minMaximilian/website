@@ -1,12 +1,8 @@
-# Add your references here in the format:
-# category:
-#   "Article Title": "https://example.com/article"
-#   "Another Article": "https://example.com/another"
-#
-# Example:
-# cpu:
-#   "CPU Performance Guide": "https://example.com"
-# prog:
-#   "Programming Tutorial": "https://example.com" 
 cpu:
-  "Another Article": "https://example.com"
+  "Data-Oriented Design Now And In The Future": "https://gamesfromwithin.com/data-oriented-design-now-and-in-the-future"
+  "Managing Data Relationships": "https://gamesfromwithin.com/managing-data-relationships"
+  "The Always-Evolving Coding Style": "https://gamesfromwithin.com/the-always-evolving-coding-style"
+  "Data-Oriented Design (Or Why You Might Be Shooting Yourself in The Foot With OOP)": "https://gamesfromwithin.com/data-oriented-design"
+  "Data-Oriented Demo: SOA, composition - Jonathan Blow": "https://www.youtube.com/watch?v=ZHqFrNyLlpA"
+prog:
+  "How Non-Member Functions Improve Encapsulation": "https://www.drdobbs.com/cpp/how-non-member-functions-improve-encapsu/184401197"

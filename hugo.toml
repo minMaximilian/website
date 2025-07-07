@@ -3,9 +3,24 @@ languageCode = 'en-us'
 title = 'Ode to the Giants'
 enableRobotsTXT = true
 
+# Enable RSS feeds
+disableRSS = false
+disableKinds = []
+
+[outputFormats]
+  [outputFormats.RSS]
+    mediaType = "application/rss+xml"
+    baseName = "index"
+    isPlainText = false
+    notAlternative = true
+
+[outputs]
+  section = ["HTML", "RSS"]
+  home = ["HTML", "RSS"]
+
 [params]
   description = 'Personal website and blog of a passionate developer exploring technology, programming, and innovation'
-  email = 'admin@odetothegiants.com'
+  email = 'webmaster@odetothegiants.com'
 
 [caches]
   [caches.images]
