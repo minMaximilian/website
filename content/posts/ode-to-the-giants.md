@@ -1,8 +1,7 @@
 +++
-title = 'Website Manifesto'
+title = 'Ode to the Giants'
 date = '2025-07-06T00:44:14+01:00'
 draft = true
-description = 'My first blog post exploring the journey of creating a personal website and sharing thoughts on technology.'
 series = 'meta'
 +++
 

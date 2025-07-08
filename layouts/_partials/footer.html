@@ -1,7 +1,7 @@
 <p>Copyright {{ now.Year }}. All rights reserved.</p>
 <p>
-    <a href="{{ " index.xml" | absURL }}" title="RSS Feed">RSS Feed</a>
-    {{ if .IsSection }}
-    | <a href="{{ " index.xml" | absURL }}" title="Section RSS Feed">Section RSS</a>
-    {{ end }}
+  <a href="{{ " index.xml" | absURL }}" title="RSS Feed">RSS Feed</a>
+  {{ if .IsSection }}
+  | <a href="{{ " index.xml" | absURL }}" title="Section RSS Feed">Section RSS</a>
+  {{ end }}
 </p>

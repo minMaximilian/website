@@ -65,16 +65,16 @@ body {
   font-family: "Courier New", monospace;
   line-height: 1.6;
   margin: 0;
-  padding: 20px;
+  padding: 0;
   background-color: var(--bg-color);
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 header {
   border-bottom: 2px solid var(--border-dark);
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  padding: 1rem 2rem;
+  max-width: 800px;
+  margin: 0 auto 0 auto;
 }
 
 header h1 {
@@ -192,23 +192,194 @@ nav a.active {
 }
 
 main {
-  background-color: var(--main-bg-color);
-  padding: 2rem;
-  border: 1px solid var(--border-color);
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem auto;
+  max-width: 800px;
 }
 
 h1,
 h2,
 h3 {
   color: var(--text-dark);
-  margin-top: 2rem;
   margin-bottom: 1rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+.page-container {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+main .page-container {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.page-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.page-sidebar {
+  width: 115px;
+}
+
+.sidebar-sticky {
+  position: sticky;
+  top: 1.25rem;
+  text-align: right;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--muted-color);
+}
+
+.sidebar-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem;
+}
+
+.sidebar-section:last-child {
+  border-bottom: none;
+  font-style: italic;
+}
+
+.sidebar-label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  color: var(--link-color);
+}
+
+.sidebar-content {
+  font-weight: normal;
+}
+
+.series-link {
+  color: var(--link-color);
+  text-decoration: none;
+  display: block;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.series-link:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+.series-icon {
+  margin-right: 0.5rem;
+}
+
+.series-buttons-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.series-buttons-sidebar .series-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  width: 100%;
+  text-align: left;
+  display: block;
+}
+
+.series-buttons-sidebar .series-btn:hover {
+  color: var(--link-hover);
+  background-color: var(--code-bg);
+}
+
+.series-buttons-sidebar .series-btn.active {
+  color: var(--link-color);
+  font-weight: bold;
+  background-color: var(--code-bg);
+}
+
+.page-content {
+  min-width: 0;
+}
+
+@media (max-width: 767px) {
+  .page-grid {
+    grid-template-areas:
+      "title"
+      "sidebar"
+      "content";
+    grid-template-columns: 1fr;
+  }
+
+  .page-title {
+    grid-area: title;
+  }
+
+  .page-sidebar {
+    grid-area: sidebar;
+    width: auto;
+  }
+
+  .page-content {
+    grid-area: content;
+  }
+
+  .sidebar-sticky {
+    position: static;
+    text-align: left;
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .sidebar-section {
+    border: none;
+    padding: 0;
+  }
+
+  .sidebar-section:last-child {
+    border: none;
+  }
+
+
+}
+
+@media (min-width: 768px) {
+  .page-grid {
+    grid-template-areas:
+      "title title"
+      "sidebar content";
+    grid-template-columns: 115px 1fr;
+    gap: 1rem;
+    column-gap: 1.5rem;
+  }
+
+  .page-title {
+    grid-area: title;
+  }
+
+  .page-sidebar {
+    grid-area: sidebar;
+  }
+
+  .page-content {
+    grid-area: content;
+    border-left: 1px solid var(--border-color);
+    padding-left: 1.5rem;
+  }
 }
 
 h1 {
   font-size: 1.5rem;
-  border-bottom: 1px solid var(--border-dark);
   padding-bottom: 0.5rem;
 }
 
@@ -251,11 +422,12 @@ pre {
 
 footer {
   border-top: 2px solid var(--border-dark);
-  margin-top: 2rem;
-  padding-top: 1rem;
+  margin: 2rem auto 0 auto;
+  padding: 1rem 2rem;
   text-align: center;
   font-size: 0.9rem;
   color: var(--muted-color);
+  max-width: 800px;
 }
 
 blockquote {
@@ -487,8 +659,6 @@ hr {
   border-bottom: none;
 }
 
-
-
 .error-404 h2 {
   font-size: 1.5rem;
   margin: 1rem 0;
@@ -551,17 +721,28 @@ hr {
 }
 
 @media (max-width: 600px) {
-  body {
-    padding: 10px;
+  header {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  main {
+    padding: 1rem;
+    margin: 0 auto 1rem auto;
+  }
+
+  footer {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .page-container {
+    padding: 0 0.5rem;
   }
 
   nav ul {
     flex-direction: column;
     gap: 0.5rem;
-  }
-
-  main {
-    padding: 1rem;
   }
 
   .pagination {
@@ -577,8 +758,4 @@ hr {
   .error-404 h1 {
     font-size: 3rem;
   }
-
-
-
-
 }

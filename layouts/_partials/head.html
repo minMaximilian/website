@@ -2,9 +2,7 @@
 <meta name="viewport" content="width=device-width">
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
 
-{{ if .Description }}
-<meta name="description" content="{{ .Description }}">
-{{ else if .Summary }}
+{{ if .Summary }}
 <meta name="description" content="{{ .Summary | plainify | truncate 160 }}">
 {{ else if .IsHome }}
 <meta name="description" content="{{ site.Params.description | default " Personal website and blog" }}">
@@ -15,17 +13,13 @@
 <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{ if .Description }}
-<meta property="og:description" content="{{ .Description }}">
-{{ else if .Summary }}
+{{ if .Summary }}
 <meta property="og:description" content="{{ .Summary | plainify | truncate 160 }}">
 {{ end }}
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
-{{ if .Description }}
-<meta name="twitter:description" content="{{ .Description }}">
-{{ else if .Summary }}
+{{ if .Summary }}
 <meta name="twitter:description" content="{{ .Summary | plainify | truncate 160 }}">
 {{ end }}
 

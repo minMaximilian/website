@@ -1,9 +1,39 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
+<div class="page-container">
+  <div class="page-grid">
+    <h1 class="page-title">{{ .Title }}</h1>
 
-{{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }} {{
-$dateHuman := .Date | time.Format ":date_long" }}
-<time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    <div class="page-sidebar">
+      <div class="sidebar-sticky">
+        <div class="sidebar-section">
+          <div class="sidebar-label">Published</div>
+          <div class="sidebar-content">
+            {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }} {{
+            $dateHuman := .Date | time.Format ":date_long" }}
+            <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+          </div>
+        </div>
 
-{{ .Content }} {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }} {{
-end }}
+        {{ if .Params.series }}
+        <div class="sidebar-section">
+          <div class="sidebar-label">Series</div>
+          <div class="sidebar-content">
+            <a href="/posts/#series-{{ .Params.series }}" class="series-link">
+              {{ .Params.series | title }}
+            </a>
+          </div>
+        </div>
+        {{ end }}
+
+        <div class="sidebar-section">
+          {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content">
+      {{ .Content }}
+    </div>
+  </div>
+</div>
+{{ end }}

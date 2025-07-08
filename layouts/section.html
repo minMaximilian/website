@@ -1,7 +1,6 @@
 {{ define "main" }}
-{{ .Content }}
-
 {{ if eq .Section "references" }}
+{{ .Content }}
 {{ range $category, $links := site.Data.references }}
 <h2 id="{{ $category }}">{{ $category | upper }}</h2>
 <div class="references-section">
@@ -19,63 +18,80 @@
 </div>
 {{ end }}
 {{ else if eq .Section "posts" }}
-{{ $allSeries := slice }}
-{{ range .Pages }}
-{{ if .Params.series }}
-{{ $allSeries = $allSeries | append .Params.series }}
-{{ end }}
-{{ end }}
-{{ $uniqueSeries := $allSeries | uniq }}
+<div class="page-container">
+  <div class="page-grid">
+    <h1 class="page-title">{{ .Title }}</h1>
 
-{{ if gt (len $uniqueSeries) 0 }}
-<div class="series-filter">
-  <h3>Filter by Series:</h3>
-  <div class="series-buttons">
-    <button class="series-btn active" data-series="all">All Posts</button>
-    {{ range $uniqueSeries }}
-    <button class="series-btn" data-series="{{ . }}">{{ . | title }}</button>
-    {{ end }}
+    <div class="page-sidebar">
+      <div class="sidebar-sticky">
+        {{ $allSeries := slice }}
+        {{ range .Pages }}
+        {{ if .Params.series }}
+        {{ $allSeries = $allSeries | append .Params.series }}
+        {{ end }}
+        {{ end }}
+        {{ $uniqueSeries := $allSeries | uniq }}
+
+        {{ if gt (len $uniqueSeries) 0 }}
+        <div class="sidebar-section">
+          <div class="sidebar-label">Filter by Series</div>
+          <div class="sidebar-content">
+            <div class="series-buttons-sidebar">
+              <button class="series-btn active" data-series="all">All Posts</button>
+              {{ range $uniqueSeries }}
+              <button class="series-btn" data-series="{{ . }}">{{ . | title }}</button>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="page-content">
+      {{ .Content }}
+
+      {{ $paginator := .Paginate .Pages 5 }}
+      {{ range $paginator.Pages }}
+      <article class="post-preview" data-series="{{ .Params.series | default " none" }}">
+        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+        <p class="post-meta">
+          {{ .Date.Format "January 2, 2006" }}
+          {{ if .Params.series }}
+          <span class="series-label">Series: {{ .Params.series | title }}</span>
+          {{ end }}
+        </p>
+        <p>{{ .Content | plainify | truncate 100 }}...</p>
+        <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+      </article>
+      {{ end }}
+
+      {{ if gt $paginator.TotalPages 1 }}
+      <nav class="pagination">
+        {{ if $paginator.HasPrev }}
+        <a href="{{ $paginator.Prev.URL }}" class="pagination-prev">← Previous</a>
+        {{ end }}
+
+        <span class="pagination-numbers">
+          {{ range $paginator.Pagers }}
+          {{ if eq . $paginator }}
+          <span class="pagination-current">{{ .PageNumber }}</span>
+          {{ else }}
+          <a href="{{ .URL }}" class="pagination-number">{{ .PageNumber }}</a>
+          {{ end }}
+          {{ end }}
+        </span>
+
+        {{ if $paginator.HasNext }}
+        <a href="{{ $paginator.Next.URL }}" class="pagination-next">Next →</a>
+        {{ end }}
+      </nav>
+      {{ end }}
+    </div>
   </div>
 </div>
-{{ end }}
-
-{{ $paginator := .Paginate .Pages 5 }}
-{{ range $paginator.Pages }}
-<article class="post-preview" data-series="{{ .Params.series | default " none" }}">
-  <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-  <p class="post-meta">
-    {{ .Date.Format "January 2, 2006" }}
-    {{ if .Params.series }}
-    <span class="series-label">Series: {{ .Params.series | title }}</span>
-    {{ end }}
-  </p>
-  <p>{{ .Content | plainify | truncate 100 }}...</p>
-  <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
-</article>
-{{ end }}
-
-{{ if gt $paginator.TotalPages 1 }}
-<nav class="pagination">
-  {{ if $paginator.HasPrev }}
-  <a href="{{ $paginator.Prev.URL }}" class="pagination-prev">← Previous</a>
-  {{ end }}
-
-  <span class="pagination-numbers">
-    {{ range $paginator.Pagers }}
-    {{ if eq . $paginator }}
-    <span class="pagination-current">{{ .PageNumber }}</span>
-    {{ else }}
-    <a href="{{ .URL }}" class="pagination-number">{{ .PageNumber }}</a>
-    {{ end }}
-    {{ end }}
-  </span>
-
-  {{ if $paginator.HasNext }}
-  <a href="{{ $paginator.Next.URL }}" class="pagination-next">Next →</a>
-  {{ end }}
-</nav>
-{{ end }}
 {{ else }}
+{{ .Content }}
 {{ range .Pages }}
 <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
 {{ .Summary }}
