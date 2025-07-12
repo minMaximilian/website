@@ -1,7 +1,14 @@
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+  <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
   <h1>{{ site.Title }}</h1>
   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
     <span class="theme-toggle-icon"></span>
   </button>
 </div>
-{{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+<div id="mobile-menu" class="mobile-menu">
+  {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+</div>

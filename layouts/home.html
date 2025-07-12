@@ -1,7 +1,7 @@
 {{ define "main" }} {{ .Content }} {{ $posts
 := where site.RegularPages "Section" "posts" }} {{ if $posts }}
-<h2>Latest Post</h2>
-{{ range first 1 $posts }}
+<h2>Latest Posts</h2>
+{{ range first 2 $posts }}
 <article class="post-preview">
   <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
   <p class="post-meta">
@@ -9,7 +9,7 @@
     <span class="series-label">Series: {{ .Params.series | title }}</span>
     {{ end }}
   </p>
-  <p>{{ .Content | plainify | truncate 100 }}...</p>
+  <div class="post-summary">{{ .Summary | replaceRE "<!--.*?-->" "" | plainify | truncate 300 | markdownify }}</div>
   <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
 </article>
 {{ end }} {{ if gt (len $posts) 1 }}

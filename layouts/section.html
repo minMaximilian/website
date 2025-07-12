@@ -20,7 +20,6 @@
 {{ else if eq .Section "posts" }}
 <div class="page-container">
   <div class="page-grid">
-    <h1 class="page-title">{{ .Title }}</h1>
 
     <div class="page-sidebar">
       <div class="sidebar-sticky">
@@ -61,7 +60,8 @@
           <span class="series-label">Series: {{ .Params.series | title }}</span>
           {{ end }}
         </p>
-        <p>{{ .Content | plainify | truncate 100 }}...</p>
+        <div class="post-summary">{{ .Summary | replaceRE "<!--.*?-->" "" | plainify | truncate 300 | markdownify }}
+        </div>
         <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
       </article>
       {{ end }}

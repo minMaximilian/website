@@ -1,7 +1,11 @@
 <p>Copyright {{ now.Year }}. All rights reserved.</p>
 <p>
-  <a href="{{ " index.xml" | absURL }}" title="RSS Feed">RSS Feed</a>
+  {{ with .Site.Home.OutputFormats.Get "RSS" }}
+  <a href="{{ .RelPermalink }}" title="RSS Feed">RSS Feed</a>
+  {{ end }}
   {{ if .IsSection }}
-  | <a href="{{ " index.xml" | absURL }}" title="Section RSS Feed">Section RSS</a>
+  {{ with .OutputFormats.Get "RSS" }}
+  | <a href="{{ .RelPermalink }}" title="Section RSS Feed">Section RSS</a>
+  {{ end }}
   {{ end }}
 </p>

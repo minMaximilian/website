@@ -12,7 +12,7 @@ Hi, I am Max, a software engineer in Ireland. I currently work as a Data Privacy
 
 I write about things that interest me here, website's manifesto can be seen in the first [blog](posts/ode-to-the-giants).
 
-## Links
+## Connect
 
-- [GitHub](https://github.com/minmaximilian)
-- [LinkedIn](https://www.linkedin.com/in/max-hodor/)
+{{< social-link platform="github" url="https://github.com/minmaximilian" text="GitHub" >}}
+{{< social-link platform="linkedin" url="https://www.linkedin.com/in/max-hodor/" text="LinkedIn" >}}
