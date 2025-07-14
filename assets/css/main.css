@@ -199,7 +199,9 @@ header h1 {
   right: 0;
   background-color: var(--main-bg-color);
   border-bottom: 2px solid var(--border-dark);
+  border-top: 1px solid var(--border-color);
   z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-menu.active {
@@ -208,16 +210,16 @@ header h1 {
 
 .mobile-menu nav {
   margin: 0;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 nav ul {
   list-style: none;
   padding: 0;
-  margin: 1rem 0 0 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 nav li {
@@ -226,24 +228,31 @@ nav li {
 
 nav a {
   color: var(--link-color);
-  text-decoration: underline;
+  text-decoration: none;
   font-weight: bold;
-  padding: 1rem;
-  border: 1px solid transparent;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--main-bg-color);
   display: block;
   width: 100%;
-  text-align: left;
+  text-align: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-family: "Courier New", monospace;
+  font-size: 0.95rem;
 }
 
 nav a:hover {
-  background-color: var(--link-color);
   color: var(--main-bg-color);
+  background-color: var(--link-color);
+  border-color: var(--link-color);
   text-decoration: none;
 }
 
 nav a.active {
-  background-color: var(--border-dark);
   color: var(--main-bg-color);
+  background-color: var(--border-dark);
+  border-color: var(--border-dark);
   text-decoration: none;
 }
 
@@ -576,23 +585,43 @@ footer {
 }
 
 .read-more {
+  display: inline-block;
   color: var(--link-color);
   text-decoration: none;
   font-weight: bold;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  background-color: var(--main-bg-color);
+  font-family: "Courier New", monospace;
 }
 
 .read-more:hover {
-  text-decoration: underline;
+  color: var(--main-bg-color);
+  background-color: var(--link-color);
+  border-color: var(--link-color);
+  text-decoration: none;
 }
 
 .view-all {
+  display: inline-block;
   color: var(--link-color);
   text-decoration: none;
   font-weight: bold;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  background-color: var(--main-bg-color);
+  font-family: "Courier New", monospace;
 }
 
 .view-all:hover {
-  text-decoration: underline;
+  color: var(--main-bg-color);
+  background-color: var(--link-color);
+  border-color: var(--link-color);
+  text-decoration: none;
 }
 
 .pagination {
@@ -608,15 +637,19 @@ footer {
 .pagination-next {
   color: var(--link-color);
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--link-color);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
   background-color: var(--main-bg-color);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-family: "Courier New", monospace;
 }
 
 .pagination-prev:hover,
 .pagination-next:hover {
-  background-color: var(--link-color);
   color: var(--main-bg-color);
+  background-color: var(--link-color);
+  border-color: var(--link-color);
 }
 
 .pagination-numbers {
@@ -632,10 +665,15 @@ footer {
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--border-color);
   background-color: var(--main-bg-color);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-family: "Courier New", monospace;
 }
 
 .pagination-number:hover {
-  background-color: var(--code-bg);
+  color: var(--main-bg-color);
+  background-color: var(--link-color);
+  border-color: var(--link-color);
 }
 
 .pagination-current {
@@ -664,7 +702,7 @@ footer {
 }
 
 .series-btn {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
   border: 1px solid var(--border-color);
   background-color: var(--main-bg-color);
   color: var(--text-color);
@@ -672,15 +710,19 @@ footer {
   text-decoration: none;
   font-family: "Courier New", monospace;
   font-size: 0.9rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
 .series-btn:hover {
-  background-color: var(--code-bg);
+  color: var(--main-bg-color);
+  background-color: var(--link-color);
+  border-color: var(--link-color);
 }
 
 .series-btn.active {
-  background-color: var(--border-dark);
   color: var(--main-bg-color);
+  background-color: var(--border-dark);
   border-color: var(--border-dark);
 }
 
@@ -767,19 +809,21 @@ footer {
   gap: 0.5rem;
   color: var(--link-color);
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 4px;
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  background-color: var(--main-bg-color);
   margin-right: 1rem;
   margin-bottom: 0.5rem;
   font-weight: bold;
+  font-family: "Courier New", monospace;
 }
 
 .social-link:hover {
-  color: var(--link-hover);
-  background-color: var(--code-bg);
-  border-color: var(--border-color);
+  color: var(--main-bg-color);
+  background-color: var(--link-color);
+  border-color: var(--link-color);
   text-decoration: none;
 }
 
@@ -815,10 +859,10 @@ footer {
   align-items: center;
   background-color: var(--main-bg-color);
   border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border-radius: 4px;
   padding: 0.15rem;
   margin-left: 0.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
   vertical-align: middle;
 }
@@ -835,8 +879,8 @@ footer {
   color: var(--muted-color);
   text-decoration: none;
   padding: 0.25rem 0.35rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  border-radius: 2px;
+  transition: all 0.2s ease;
   min-width: 20px;
   height: 20px;
   font-size: 0.75rem;
@@ -844,10 +888,13 @@ footer {
 }
 
 .ref-link:hover {
-  color: var(--link-color);
-  background-color: var(--code-bg);
+  color: var(--main-bg-color);
+  background-color: var(--link-color);
   text-decoration: none;
-  transform: scale(1.05);
+}
+
+.ref-link:hover svg text {
+  fill: var(--link-color);
 }
 
 .ref-divider {
@@ -862,10 +909,6 @@ footer {
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
-}
-
-.ref-link:hover .ref-icon {
-  transform: scale(1.1);
 }
 
 .ref-icon svg {
@@ -893,23 +936,29 @@ footer {
     position: static;
     background-color: transparent;
     border-bottom: none;
+    border-top: none;
     z-index: auto;
+    box-shadow: none;
   }
 
   .mobile-menu nav {
-    margin: 1rem 0 0 0;
+    margin: 1.5rem 0 0 0;
     padding: 0;
   }
 
   nav ul {
     flex-direction: row;
-    gap: 1rem;
+    gap: 0.5rem;
+    justify-content: center;
   }
 
   nav a {
-    padding: 0.2rem 0.5rem;
-    display: inline;
+    padding: 0.5rem 1rem;
+    display: inline-block;
     width: auto;
+    margin: 0;
+    text-align: center;
+    font-size: 0.9rem;
   }
 
   main {
