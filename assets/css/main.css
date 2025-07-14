@@ -84,6 +84,21 @@ header h1 {
   color: var(--text-dark);
 }
 
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.reference-url {
+  font-size: 14px;
+}
+
+.reference-url-small {
+  font-size: 10px;
+}
+
 .theme-toggle {
   background: none;
   border: 2px solid var(--border-dark);
