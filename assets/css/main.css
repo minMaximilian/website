@@ -493,6 +493,10 @@ footer {
   line-height: 1.4;
 }
 
+.references-section .link b {
+  display: inline;
+}
+
 .references-section .link b a {
   color: var(--link-color);
   text-decoration: underline;
@@ -804,6 +808,74 @@ footer {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin: 1rem 0;
+}
+
+.ref-links-pill {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 0.15rem;
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.ref-links-pill:hover {
+  border-color: var(--link-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ref-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-color);
+  text-decoration: none;
+  padding: 0.25rem 0.35rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  min-width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+.ref-link:hover {
+  color: var(--link-color);
+  background-color: var(--code-bg);
+  text-decoration: none;
+  transform: scale(1.05);
+}
+
+.ref-divider {
+  width: 1px;
+  height: 12px;
+  background-color: var(--border-color);
+  margin: 0 0.15rem;
+}
+
+.ref-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.ref-link:hover .ref-icon {
+  transform: scale(1.1);
+}
+
+.ref-icon svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.ref-text {
+  display: none;
 }
 
 @media (min-width: 768px) {

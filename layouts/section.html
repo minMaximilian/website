@@ -6,13 +6,9 @@
 <div class="references-section">
   {{ range $title, $url := $links }}
   <p class="link">
-    <b><a target="_blank" href="{{ $url }}">{{ $title }}</a></b>
-    <a target="_blank" class="a-low" href="https://web.archive.org/web/{{ $url }}">[archive]</a>
-    <a target="_blank" class="a-low"
-      href="https://hn.algolia.com/?dateRange=all&page=0&prefix=false&sort=byPopularity&type=story&query={{ $url | urlquery }}">[hn]</a>
-    <a target="_blank" class="a-low" href="https://www.reddit.com/search/?q=url%3A{{ $url | urlquery }}">[reddit]</a>
+    <b><a target="_blank" href="{{ $url }}">{{ $title }}</a></b>{{ partial "ref-links-pill.html" (dict "url" $url) }}
     <br />
-    <span style="font-size: 14px">{{ $url }}</span>
+    <span style="font-size: 10px">{{ $url }}</span>
   </p>
   {{ end }}
 </div>
