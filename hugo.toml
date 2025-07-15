@@ -21,6 +21,12 @@ disableKinds = []
   description = 'Personal website and blog of a passionate developer exploring technology, programming, and innovation'
   email = 'webmaster@odetothegiants.com'
 
+  # Bluesky Comments Configuration
+  [params.bluesky]
+    enabled = true
+    handle = "minmaximilian.com"
+    baseUrl = "https://bsky.social"
+
 [caches]
   [caches.images]
     dir = ':cacheDir/images'

@@ -25,14 +25,20 @@
         </div>
         {{ end }}
 
-        <div class="sidebar-section">
-          {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+
+        {{ if isset .Params "comments" }}
+        <div class="sidebar-section" id="bluesky-post-stats-section">
+
         </div>
+        {{ end }}
       </div>
     </div>
 
     <div class="page-content">
       {{ .Content }}
+
+
+      {{ partial "bluesky-comments.html" . }}
     </div>
   </div>
 </div>

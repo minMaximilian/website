@@ -1,8 +1,9 @@
 +++
-title = 'Example Post with References'
 date = '2025-07-06T00:44:14+01:00'
 draft = true
 series = 'tutorials'
+title = "Test Post"
+comments = { id = "3ltze7rfsrk2q" }
 +++
 
 # Working with References

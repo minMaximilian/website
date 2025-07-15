@@ -277,11 +277,6 @@ main {
   padding: 1rem;
 }
 
-main p {
-  text-align: justify;
-  text-justify: inter-word;
-}
-
 .page-title {
   font-size: 2rem;
   margin-bottom: 0.25rem;
@@ -322,8 +317,6 @@ main .page-container {
 .page-content {
   grid-area: content;
   min-width: 0;
-  text-align: justify;
-  text-justify: inter-word;
 }
 
 .sidebar-sticky {
@@ -543,8 +536,6 @@ footer {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border-color);
-  text-align: justify;
-  text-justify: inter-word;
 }
 
 .post-preview:last-child {
@@ -1043,4 +1034,119 @@ footer {
   .error-404 h1 {
     font-size: 4rem;
   }
+}
+
+/* Bluesky Comments Section */
+#bluesky-comments-container h2 {
+  font-size: 1.2rem;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stat-item {
+  margin-bottom: 0.25rem;
+}
+
+.comment-reply-box {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.comment-element {
+  margin-bottom: 1rem;
+}
+
+.comment-container {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.comment-thread-line-container {
+  position: relative;
+  flex-shrink: 0;
+  width: 36px;
+}
+
+.comment-thread-line {
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  bottom: -1rem;
+  width: 2px;
+  background-color: var(--border-color);
+}
+
+.comment-element:last-child .comment-thread-line {
+  display: none;
+}
+
+.comment-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+
+.comment-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.comment-header {
+  font-size: 0.85em;
+  color: var(--muted-color);
+  margin-bottom: 0.25rem;
+}
+
+.comment-header .username-link {
+  font-weight: bold;
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.comment-header .username-link:hover {
+  text-decoration: underline;
+}
+
+.comment-header .timestamp-separator {
+  margin: 0 0.25rem;
+}
+
+.comment-text {
+  color: var(--text-color);
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.comment-meta {
+  padding-left: 1rem;
+  flex-shrink: 0;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: var(--muted-color);
+}
+
+.child-comments {
+  padding-left: 18px;
+  border-left: 2px solid var(--border-color);
+  margin-left: 17px;
+  padding-top: 1rem;
+}
+
+.comment-loading,
+.no-comments-found,
+.comment-error {
+  text-align: center;
+  padding: 1rem;
+  color: var(--muted-color);
 }
