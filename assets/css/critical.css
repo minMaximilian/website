@@ -1,0 +1,147 @@
+:root {
+  --bg-color: #f8f8f8;
+  --main-bg-color: white;
+  --text-color: #333;
+  --text-dark: #000;
+  --link-color: #0066cc;
+  --link-hover: #004499;
+  --border-color: #ddd;
+  --border-dark: #333;
+  --code-bg: #f0f0f0;
+  --muted-color: #666;
+  --table-header-bg: #f0f0f0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a1a1a;
+    --main-bg-color: #2d2d2d;
+    --text-color: #e0e0e0;
+    --text-dark: #ffffff;
+    --link-color: #66b3ff;
+    --link-hover: #4da6ff;
+    --border-color: #404040;
+    --border-dark: #666;
+    --code-bg: #3a3a3a;
+    --muted-color: #aaa;
+    --table-header-bg: #404040;
+  }
+}
+
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;
+  --main-bg-color: #2d2d2d;
+  --text-color: #e0e0e0;
+  --text-dark: #ffffff;
+  --link-color: #66b3ff;
+  --link-hover: #4da6ff;
+  --border-color: #404040;
+  --border-dark: #666;
+  --code-bg: #3a3a3a;
+  --muted-color: #aaa;
+  --table-header-bg: #404040;
+}
+
+[data-theme="light"] {
+  --bg-color: #f8f8f8;
+  --main-bg-color: white;
+  --text-color: #333;
+  --text-dark: #000;
+  --link-color: #0066cc;
+  --link-hover: #004499;
+  --border-color: #ddd;
+  --border-dark: #333;
+  --code-bg: #f0f0f0;
+  --muted-color: #666;
+  --table-header-bg: #f0f0f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--text-color);
+  font-family: "Courier New", monospace;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  width: 100%;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.post-preview {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.post-preview:last-child {
+  border-bottom: none;
+}
+
+.post-summary {
+  margin-bottom: 1rem;
+}
+
+.post-preview h3 {
+  margin-top: 0;
+}
+
+.post-meta {
+  color: var(--muted-color);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.series-label {
+  background-color: var(--code-bg);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.8em;
+}
+
+.btn {
+  display: inline-block;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--link-color);
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn:hover {
+  color: var(--main-bg-color);
+  background-color: var(--link-color);
+  border-color: var(--link-color);
+  text-decoration: none;
+}

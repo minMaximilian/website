@@ -2,8 +2,8 @@
 {{ if eq .Section "references" }}
 {{ .Content }}
 {{ range $category, $links := site.Data.references }}
-<h2 id="{{ $category }}">{{ $category | upper }}</h2>
 <div class="references-section">
+  <h2 id="{{ $category }}">{{ $category | upper }}</h2>
   {{ range $title, $url := $links }}
   <p class="link">
     <b><a target="_blank" href="{{ $url }}">{{ $title }}</a></b>{{ partial "ref-links-pill.html" (dict "url" $url) }}
@@ -58,28 +58,28 @@
         </p>
         <div class="post-summary">{{ .Summary | replaceRE "<!--.*?-->" "" | plainify | truncate 300 | markdownify }}
         </div>
-        <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+        <a href="{{ .RelPermalink }}" class="read-more btn">Read more →</a>
       </article>
       {{ end }}
 
       {{ if gt $paginator.TotalPages 1 }}
       <nav class="pagination">
         {{ if $paginator.HasPrev }}
-        <a href="{{ $paginator.Prev.URL }}" class="pagination-prev">← Previous</a>
+        <a href="{{ $paginator.Prev.URL }}" class="pagination-prev btn">← Previous</a>
         {{ end }}
 
         <span class="pagination-numbers">
           {{ range $paginator.Pagers }}
           {{ if eq . $paginator }}
-          <span class="pagination-current">{{ .PageNumber }}</span>
+          <span class="pagination-current btn active">{{ .PageNumber }}</span>
           {{ else }}
-          <a href="{{ .URL }}" class="pagination-number">{{ .PageNumber }}</a>
+          <a href="{{ .URL }}" class="pagination-number btn">{{ .PageNumber }}</a>
           {{ end }}
           {{ end }}
         </span>
 
         {{ if $paginator.HasNext }}
-        <a href="{{ $paginator.Next.URL }}" class="pagination-next">Next →</a>
+        <a href="{{ $paginator.Next.URL }}" class="pagination-next btn">Next →</a>
         {{ end }}
       </nav>
       {{ end }}

@@ -80,8 +80,10 @@ header {
 
 header h1 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: clamp(1.1rem, 4.5vw, 1.8rem);
   color: var(--text-dark);
+  text-align: center;
+  flex: 1;
 }
 
 .header-flex {
@@ -242,33 +244,42 @@ nav li {
 }
 
 nav a {
-  color: var(--link-color);
-  text-decoration: none;
-  font-weight: bold;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--border-color);
-  background-color: var(--main-bg-color);
-  display: block;
-  width: 100%;
-  text-align: center;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  font-family: "Courier New", monospace;
   font-size: 0.95rem;
 }
 
-nav a:hover {
+.btn {
+  display: inline-block;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--link-color);
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn:hover {
   color: var(--main-bg-color);
   background-color: var(--link-color);
   border-color: var(--link-color);
   text-decoration: none;
 }
 
-nav a.active {
+.btn.active {
   color: var(--main-bg-color);
   background-color: var(--border-dark);
   border-color: var(--border-dark);
   text-decoration: none;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
 }
 
 main {
@@ -322,8 +333,6 @@ main .page-container {
 .sidebar-sticky {
   position: static;
   text-align: left;
-  display: flex;
-  gap: 1rem;
   font-size: 0.85rem;
   line-height: 1.4;
   color: var(--muted-color);
@@ -336,7 +345,6 @@ main .page-container {
 
 .sidebar-section:last-child {
   border-bottom: none;
-  font-style: italic;
 }
 
 .sidebar-label {
@@ -494,10 +502,7 @@ footer {
 }
 
 .references-section h2 {
-  color: var(--text-dark);
-  border-bottom: 1px solid var(--border-dark);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+  margin-top: 0;
 }
 
 .references-section h3 {
@@ -507,11 +512,18 @@ footer {
 
 .references-section .link {
   margin-bottom: 1.5rem;
-  line-height: 1.4;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.references-section h2+.link {
+  margin: 0;
 }
 
 .references-section .link b {
-  display: inline;
+  display: block;
 }
 
 .references-section .link b a {
@@ -590,45 +602,9 @@ footer {
   border: 1px solid var(--border-color);
 }
 
-.read-more {
-  display: inline-block;
-  color: var(--link-color);
-  text-decoration: none;
-  font-weight: bold;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  border: 1px solid var(--border-color);
-  background-color: var(--main-bg-color);
-  font-family: "Courier New", monospace;
-}
+.read-more {}
 
-.read-more:hover {
-  color: var(--main-bg-color);
-  background-color: var(--link-color);
-  border-color: var(--link-color);
-  text-decoration: none;
-}
-
-.view-all {
-  display: inline-block;
-  color: var(--link-color);
-  text-decoration: none;
-  font-weight: bold;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  border: 1px solid var(--border-color);
-  background-color: var(--main-bg-color);
-  font-family: "Courier New", monospace;
-}
-
-.view-all:hover {
-  color: var(--main-bg-color);
-  background-color: var(--link-color);
-  border-color: var(--link-color);
-  text-decoration: none;
-}
+.view-on-bsky {}
 
 .pagination {
   margin: 2rem 0;
@@ -640,22 +616,9 @@ footer {
 }
 
 .pagination-prev,
-.pagination-next {
-  color: var(--link-color);
-  text-decoration: none;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border-color);
-  background-color: var(--main-bg-color);
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  font-family: "Courier New", monospace;
-}
-
-.pagination-prev:hover,
-.pagination-next:hover {
-  color: var(--main-bg-color);
-  background-color: var(--link-color);
-  border-color: var(--link-color);
+.pagination-next,
+.pagination-number {
+  /* All styles moved to .btn */
 }
 
 .pagination-numbers {
@@ -663,23 +626,6 @@ footer {
   gap: 0.5rem;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.pagination-number {
-  color: var(--link-color);
-  text-decoration: none;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border-color);
-  background-color: var(--main-bg-color);
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  font-family: "Courier New", monospace;
-}
-
-.pagination-number:hover {
-  color: var(--main-bg-color);
-  background-color: var(--link-color);
-  border-color: var(--link-color);
 }
 
 .pagination-current {
@@ -708,32 +654,13 @@ footer {
 }
 
 .series-btn {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border-color);
-  background-color: var(--main-bg-color);
-  color: var(--text-color);
-  cursor: pointer;
-  text-decoration: none;
-  font-family: "Courier New", monospace;
   font-size: 0.9rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.series-btn:hover {
-  color: var(--main-bg-color);
-  background-color: var(--link-color);
-  border-color: var(--link-color);
 }
 
 .series-btn.active {
   color: var(--main-bg-color);
   background-color: var(--border-dark);
   border-color: var(--border-dark);
-}
-
-.post-preview.hidden {
-  display: none;
 }
 
 .error-404 {
@@ -761,20 +688,7 @@ footer {
 }
 
 .error-404 .home-button {
-  display: inline-block;
-  background-color: var(--link-color);
-  color: var(--main-bg-color);
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
   margin: 2rem 0;
-}
-
-.error-404 .home-button:hover {
-  background-color: var(--link-hover);
-  color: var(--main-bg-color);
 }
 
 .error-404 .popular-pages {
@@ -813,24 +727,8 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--link-color);
-  text-decoration: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  border: 1px solid var(--border-color);
-  background-color: var(--main-bg-color);
   margin-right: 1rem;
   margin-bottom: 0.5rem;
-  font-weight: bold;
-  font-family: "Courier New", monospace;
-}
-
-.social-link:hover {
-  color: var(--main-bg-color);
-  background-color: var(--link-color);
-  border-color: var(--link-color);
-  text-decoration: none;
 }
 
 .social-icon {
@@ -855,28 +753,28 @@ footer {
 
 .social-links {
   display: flex;
+  gap: 1rem;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 1rem 0;
 }
 
 .ref-links-pill {
   display: inline-flex;
   align-items: center;
-  background-color: var(--main-bg-color);
   border: 1px solid var(--border-color);
-  border-radius: 4px;
-  padding: 0.15rem;
-  margin-left: 0.5rem;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
+  border-radius: 16px;
+  padding: 4px;
+  background-color: var(--code-bg);
+  margin-left: 0;
+  margin-top: 0.5rem;
   vertical-align: middle;
+  position: relative;
+  top: -2px;
 }
 
 
 
 .ref-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   color: var(--muted-color);
@@ -921,13 +819,21 @@ footer {
 }
 
 .ref-text {
-  display: none;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .sidebar-sticky {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
 }
 
 @media (min-width: 768px) {
 
   header {
-    padding: 1rem 2rem;
+    padding: 1rem 0;
   }
 
   .mobile-menu-toggle {
@@ -957,16 +863,24 @@ footer {
 
   nav a {
     padding: 0.5rem 1rem;
-    display: inline-block;
-    width: auto;
-    margin: 0;
-    text-align: center;
-    font-size: 0.9rem;
+    font-size: 1rem;
+  }
+
+  .references-section .link {
+    display: block;
+  }
+
+  .references-section .link b {
+    display: inline;
+  }
+
+  .ref-links-pill {
+    margin-left: 8px;
+    margin-top: 0;
   }
 
   main {
-    padding: 0 1rem;
-    margin: 0 auto 2rem auto;
+    padding: 2rem 1rem;
   }
 
   .page-container {
@@ -1007,10 +921,6 @@ footer {
   .series-buttons-sidebar {
     flex-direction: column;
     flex-wrap: nowrap;
-  }
-
-  .series-buttons-sidebar .series-btn {
-    width: 100%;
   }
 
   .sidebar-section:last-child {
@@ -1149,4 +1059,10 @@ footer {
   text-align: center;
   padding: 1rem;
   color: var(--muted-color);
+}
+
+@media (min-width: 768px) {
+  .child-comments {
+    padding-left: 30px;
+  }
 }

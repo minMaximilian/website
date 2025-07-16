@@ -1,9 +1,21 @@
+{{- $critical := resources.Get "css/critical.css" | minify -}}
+<style>
+    {
+            {
+            $critical.Content | safeCSS
+        }
+    }
+</style>
+
 {{- with resources.Get "css/main.css" }}
 {{- if hugo.IsDevelopment }}
 <link rel="stylesheet" href="{{ .RelPermalink }}">
 {{- else }}
 {{- with . | minify | fingerprint }}
-<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+<link rel="preload" href="{{ .RelPermalink }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" href="{{ .RelPermalink }}">
+</noscript>
 {{- end }}
 {{- end }}
 {{- end }}

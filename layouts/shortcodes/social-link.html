@@ -2,7 +2,7 @@
 {{- $url := .Get "url" -}}
 {{- $text := .Get "text" | default $platform -}}
 
-<a href="{{ $url }}" class="social-link social-link-{{ $platform }}" target="_blank" rel="noopener noreferrer">
+<a href="{{ $url }}" class="social-link social-link-{{ $platform }} btn" target="_blank" rel="noopener noreferrer">
     <span class="social-icon">
         {{- if eq $platform "github" -}}
         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">

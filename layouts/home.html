@@ -9,9 +9,11 @@
     <span class="series-label">Series: {{ .Params.series | title }}</span>
     {{ end }}
   </p>
-  <div class="post-summary">{{ .Summary | replaceRE "<!--.*?-->" "" | plainify | truncate 300 | markdownify }}</div>
-  <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+  <div class="post-summary">
+    {{ .Summary }}
+  </div>
+  <a href="{{ .RelPermalink }}" class="read-more btn">Read more →</a>
 </article>
 {{ end }} {{ if gt (len $posts) 1 }}
-<p><a href="/posts/" class="view-all">View all posts →</a></p>
+<p><a href="/posts/" class="view-all btn">View all posts →</a></p>
 {{ end }} {{ end }} {{ end }}

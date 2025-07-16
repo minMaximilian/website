@@ -2,23 +2,26 @@
 <div class="article-content" id="bluesky-comments-container">
   <h2>Comments</h2>
   <div class="comment-reply-box">
-    <span>
-      This post is being discussed on Bluesky. You can view the conversation and
-      add your own reply there.
-    </span>
-    <a class="read-more"
-      href="https://bsky.app/profile/{{ .Site.Params.bluesky.handle }}/post/{{ .Params.comments.id }}" target="_blank"
-      rel="noopener">Reply on Bluesky</a>
+    <p>What do you think? Let me know on Bluesky!</p>
+    <div>
+      <a class="read-more btn" id="reply-link" href="#" target="_blank">Reply on Bluesky</a>
+      <a class="read-more btn" id="view-post-link" href="#" target="_blank">View Post</a>
+    </div>
   </div>
-  <div id="bluesky-comments-list"></div>
+  <div id="comments-thread"></div>
+  <div id="no-comments" style="display: none;">No comments found.</div>
   <noscript>You need JavaScript to view the comments.</noscript>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"
     integrity="sha512-YlctBG9PGZIhh9keoqI3eZkQM9T8QUbiBi7qNYAO/TUEo8jqWX5pLp5+x1cKRQDRzJ/lyGyJ9WUVNIRduxIIFw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
-      const commentList = document.getElementById("bluesky-comments-list");
+      const commentList = document.getElementById("comments-thread");
+      const replyLink = document.getElementById("reply-link");
+      const viewPostLink = document.getElementById("view-post-link");
+
       commentList.innerHTML = `<div class="comment-loading">Loading comments...</div>`;
+
       fetch(
         `https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=at://{{ .Site.Params.bluesky.handle }}/app.bsky.feed.post/{{ .Params.comments.id }}&depth=10`
       )
@@ -26,16 +29,25 @@
         .then((data) => {
           const mainPost = data.thread.post;
           if (mainPost) {
+            const likeCount = mainPost.likeCount || 0;
+            const repostCount = mainPost.repostCount || 0;
+            const bskyPostUrl = `https://bsky.app/profile/{{ .Site.Params.bluesky.handle }}/post/{{ .Params.comments.id }}`;
             const statsContainer = document.getElementById("bluesky-post-stats-section");
+
             if (statsContainer) {
-              const likeCount = mainPost.likeCount || 0;
               statsContainer.innerHTML = `
-                <div class="sidebar-label">Post Stats</div>
-                <div class="sidebar-content">
-                  <div class="stat-item">❤ ${likeCount}</div>
+                <div class="sidebar-section">
+                  <div class="sidebar-label">Post Stats</div>
+                  <div class="sidebar-content">
+                    <div class="stat-item">Likes: ${likeCount}</div>
+                    <div class="stat-item">Reposts: ${repostCount}</div>
+                  </div>
                 </div>
               `;
             }
+
+            replyLink.href = `https://bsky.app/intent/compose?text=&replyTo=${mainPost.uri}`;
+            viewPostLink.href = bskyPostUrl;
           }
 
           const replies = data.thread.replies || [];
