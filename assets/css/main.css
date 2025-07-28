@@ -423,6 +423,25 @@ h2 {
   color: var(--text-color);
 }
 
+sup {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  color: var(--muted-color);
+  font-weight: normal;
+  text-decoration: none;
+}
+
+sup a {
+  color: var(--muted-color);
+  text-decoration: none;
+}
+
+sup a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
 a {
   color: var(--link-color);
   text-decoration: underline;
@@ -439,6 +458,20 @@ ol {
 
 li {
   margin-bottom: 0.5rem;
+}
+
+p {
+  text-indent: 2em;
+  margin-bottom: 1rem;
+}
+
+h1+p,
+h2+p,
+h3+p,
+h4+p,
+h5+p,
+h6+p {
+  text-indent: 0;
 }
 
 pre,
@@ -602,10 +635,6 @@ footer {
   border: 1px solid var(--border-color);
 }
 
-.read-more {}
-
-.view-on-bsky {}
-
 .pagination {
   margin: 2rem 0;
   display: flex;
@@ -613,12 +642,6 @@ footer {
   align-items: center;
   flex-direction: column;
   gap: 0.5rem;
-}
-
-.pagination-prev,
-.pagination-next,
-.pagination-number {
-  /* All styles moved to .btn */
 }
 
 .pagination-numbers {
@@ -946,7 +969,6 @@ footer {
   }
 }
 
-/* Bluesky Comments Section */
 #bluesky-comments-container h2 {
   font-size: 1.2rem;
   margin: 0 0 1rem 0;
