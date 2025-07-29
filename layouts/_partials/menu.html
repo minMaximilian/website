@@ -23,8 +23,10 @@
 {{- end }}
 {{- end }}
 <li>
-  <a {{- range $k, $v :=$attrs }} {{- with $v }} {{- printf " %s=%q" $k $v | safeHTMLAttr }} {{- end }} {{- end -}}>{{
-    $name }}</a>
+  <a {{- range $k, $v :=$attrs }} {{- with $v }} {{- printf " %s=%q" $k $v | safeHTMLAttr }} {{- end }} {{- end -}}
+    href="{{ .URL | default " #" }}">
+    {{ $name }}
+  </a>
   {{- with .Children }}
   <ul>
     {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}

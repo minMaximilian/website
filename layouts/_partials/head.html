@@ -3,12 +3,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 {{- partial "head/css.html" . -}}
 {{- partial "head/js.html" . -}}
-<svg style="position: absolute; width: 0; height: 0;">
-  <filter id="grainy">
-    <feTurbulence type="turbulence" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch" />
-    <feColorMatrix type="saturate" values="0" />
-  </filter>
-</svg>
 <title>
   {{- if .IsHome -}}
   {{- .Site.Title -}}
@@ -16,24 +10,22 @@
   {{- printf "%s | %s" .Title site.Title -}}
   {{- end -}}
 </title>
-{{ if .Summary }}
-<meta name="description" content="{{ .Summary | plainify | truncate 160 }}">
-{{ else if .IsHome }}
-<meta name="description" content="{{ site.Params.description | default " Personal website and blog" }}">
-{{ else }}
-<meta name="description" content="{{ .Title }} - {{ site.Title }}">
-{{ end }}
+{{- $description := "" -}}
+{{- if .IsHome -}}
+{{- $description = site.Params.description | default "Personal website and blog" -}}
+{{- else if .Summary -}}
+{{- $description = .Summary | plainify | truncate 160 -}}
+{{- else -}}
+{{- $description = printf "%s - %s" .Title site.Title -}}
+{{- end -}}
+<meta name="description" content="{{ $description }}">
 <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{ if .Summary }}
-<meta property="og:description" content="{{ .Summary | plainify | truncate 160 }}">
-{{ end }}
+<meta property="og:description" content="{{ $description }}">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
-{{ if .Summary }}
-<meta name="twitter:description" content="{{ .Summary | plainify | truncate 160 }}">
-{{ end }}
+<meta name="twitter:description" content="{{ $description }}">
 {{ range .AlternativeOutputFormats -}}
 {{ printf `
 <link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}

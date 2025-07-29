@@ -65,6 +65,30 @@ a:hover {
   text-decoration: underline;
 }
 
+.page-grid {
+  display: grid;
+  grid-template-areas:
+    "title"
+    "sidebar"
+    "content";
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+.page-title {
+  grid-area: title;
+}
+
+.page-sidebar {
+  grid-area: sidebar;
+  width: auto;
+}
+
+.page-content {
+  grid-area: content;
+  min-width: 0;
+}
+
 .post-preview {
   margin-bottom: 2rem;
   border-bottom: 1px solid var(--border-color);

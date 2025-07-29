@@ -6,11 +6,18 @@
 </head>
 
 <body>
+  <svg style="position: absolute; width: 0; height: 0;">
+    <filter id="grainy">
+      <feTurbulence type="turbulence" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+    </filter>
+  </svg>
   <header>
     {{ partial "header.html" . }}
   </header>
   <main>
-    {{ block "main" . }}{{ end }}
+    {{ block "main" . }}
+    {{ end }}
   </main>
   <footer>
     {{ partial "footer.html" . }}
