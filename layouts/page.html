@@ -2,7 +2,6 @@
 <div class="page-container">
   <div class="page-grid">
     <h1 class="page-title">{{ .Title }}</h1>
-
     <div class="page-sidebar">
       <div class="sidebar-sticky">
         <div class="sidebar-section">
@@ -13,7 +12,6 @@
             <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
           </div>
         </div>
-
         {{ if .Params.series }}
         <div class="sidebar-section">
           <div class="sidebar-label">Series</div>
@@ -24,22 +22,16 @@
           </div>
         </div>
         {{ end }}
-
-
         {{ if isset .Params "comments" }}
         <div class="sidebar-section" id="bluesky-post-stats-section">
         </div>
         {{ end }}
       </div>
-
       <div id="bluesky-post-stats-section">
       </div>
     </div>
-
     <div class="page-content">
       {{ .Content }}
-
-
       {{ partial "bluesky-comments.html" . }}
     </div>
   </div>

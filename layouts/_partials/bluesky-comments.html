@@ -19,9 +19,7 @@
       const commentList = document.getElementById("comments-thread");
       const replyLink = document.getElementById("reply-link");
       const viewPostLink = document.getElementById("view-post-link");
-
       commentList.innerHTML = `<div class="comment-loading">Loading comments...</div>`;
-
       fetch(
         `https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=at://{{ .Site.Params.bluesky.handle }}/app.bsky.feed.post/{{ .Params.comments.id }}&depth=10`
       )
@@ -33,7 +31,6 @@
             const repostCount = mainPost.repostCount || 0;
             const bskyPostUrl = `https://bsky.app/profile/{{ .Site.Params.bluesky.handle }}/post/{{ .Params.comments.id }}`;
             const statsContainer = document.getElementById("bluesky-post-stats-section");
-
             if (statsContainer) {
               statsContainer.innerHTML = `
                 <div class="sidebar-section">
@@ -45,11 +42,9 @@
                 </div>
               `;
             }
-
             replyLink.href = `https://bsky.app/intent/compose?text=&replyTo=${mainPost.uri}`;
             viewPostLink.href = bskyPostUrl;
           }
-
           const replies = data.thread.replies || [];
           if (replies.length === 0) {
             commentList.innerHTML = `<div class="no-comments-found">No comments yet. Be the first to reply on Bluesky!</div>`;
@@ -120,7 +115,6 @@
               commentElement.className = "comment-element";
               commentElement.innerHTML = commentHtml;
               parentElement.appendChild(commentElement);
-
               if (reply.replies && reply.replies.length > 0) {
                 const childCommentsContainer = document.createElement("div");
                 childCommentsContainer.className = "child-comments";

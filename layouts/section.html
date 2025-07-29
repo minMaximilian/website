@@ -16,7 +16,6 @@
 {{ else if eq .Section "posts" }}
 <div class="page-container">
   <div class="page-grid">
-
     <div class="page-sidebar">
       <div class="sidebar-sticky">
         {{ $allSeries := slice }}
@@ -26,7 +25,6 @@
         {{ end }}
         {{ end }}
         {{ $uniqueSeries := $allSeries | uniq }}
-
         {{ if gt (len $uniqueSeries) 0 }}
         <div class="sidebar-section">
           <div class="sidebar-label">Filter by Series</div>
@@ -42,10 +40,8 @@
         {{ end }}
       </div>
     </div>
-
     <div class="page-content">
       {{ .Content }}
-
       {{ $paginator := .Paginate .Pages 5 }}
       {{ range $paginator.Pages }}
       <article class="post-preview" data-series="{{ .Params.series | default " none" }}">
@@ -56,18 +52,16 @@
           <span class="series-label">Series: {{ .Params.series | title }}</span>
           {{ end }}
         </p>
-        <div class="post-summary">{{ .Summary | replaceRE "<!--.*?-->" "" | plainify | truncate 300 | markdownify }}
+        <div class="post-summary">{{ .Summary | replaceRE "" "" | plainify | truncate 300 | markdownify }}
         </div>
         <a href="{{ .RelPermalink }}" class="read-more btn">Read more →</a>
       </article>
       {{ end }}
-
       {{ if gt $paginator.TotalPages 1 }}
       <nav class="pagination">
         {{ if $paginator.HasPrev }}
         <a href="{{ $paginator.Prev.URL }}" class="pagination-prev btn">← Previous</a>
         {{ end }}
-
         <span class="pagination-numbers">
           {{ range $paginator.Pagers }}
           {{ if eq . $paginator }}
@@ -77,7 +71,6 @@
           {{ end }}
           {{ end }}
         </span>
-
         {{ if $paginator.HasNext }}
         <a href="{{ $paginator.Next.URL }}" class="pagination-next btn">Next →</a>
         {{ end }}
