@@ -5,14 +5,20 @@ draft = false
 description = 'Personal hobby website of a programmer exploring technology. Collection of projects, blog posts, and curated references.'
 +++
 
-Hi, I am Max, a software engineer in Ireland. I currently work as a Data Privacy Engineer at [Hubspot](https://www.hubspot.com/). I helped ship:
+I'm Max
+
+Software should cut through signal and noise, not create it.
+
+## Work
+
+A software engineer in Cork, Ireland. I currently work as a Data Privacy Engineer at [Hubspot](https://www.hubspot.com/). I helped ship:
 
 - [Sensitive Data](https://knowledge.hubspot.com/properties/store-sensitive-data)
 - [Privacy Pages and Management](https://knowledge.hubspot.com/privacy-and-consent/manage-data-privacy-requests)
 
-I write about things that interest me here, website's manifesto can be seen in the first [blog](posts/ode-to-the-giants).
+## Contact Me
 
-## Connect
+Feel free to email me <a class="reference external" href="mailto:admin@odetothegiants.com">here</a>. I read and try to reply to everything.
 
 {{< social-link platform="github" url="https://github.com/minmaximilian" text="GitHub" >}}
 {{< social-link platform="linkedin" url="https://www.linkedin.com/in/max-hodor/" text="LinkedIn" >}}

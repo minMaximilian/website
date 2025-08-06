@@ -4,28 +4,19 @@
   --accent: #e3c88f;
   --ui: #566073;
   --light: #E7EAF1;
-  --dark: #1A2233;
+  --dark: #0f1626;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --light: #1A2233;
+    --light: #131722;
     --dark: #E7EAF1;
   }
 }
 
 [data-theme="dark"] {
-  --light: #1A2233;
+  --light: #131722;
   --dark: #E7EAF1;
-}
-
-[data-theme="light"] {
-  --primary: #1A2233;
-  --secondary: #566073;
-  --accent: #cfb073;
-  --light: #E7EAF1;
-  --dark: #1A2233;
-  --ui: #d1d5db;
 }
 
 * {
@@ -33,36 +24,33 @@
 }
 
 body {
-  color: var(--text-color);
-  font-family: "Courier New", monospace;
-  line-height: 1.6;
   margin: 0;
-  padding: 0;
-  background-color: var(--bg-color);
-  width: 100%;
+  background: var(--light);
+  color: var(--dark);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Courier New", monospace;
+  line-height: 1.6;
 }
 
 main {
-  max-width: 800px;
+  max-width: 860px;
   margin: 0 auto;
   padding: 1rem;
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  margin: 1rem 0 .5rem;
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  margin: .75rem 0 .5rem;
 }
 
 a {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
-a:hover {
+  color: var(--primary);
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .page-grid {
@@ -72,7 +60,7 @@ a:hover {
     "sidebar"
     "content";
   grid-template-columns: 1fr;
-  gap: 0.5rem;
+  gap: .5rem;
 }
 
 .page-title {
@@ -81,7 +69,6 @@ a:hover {
 
 .page-sidebar {
   grid-area: sidebar;
-  width: auto;
 }
 
 .page-content {
@@ -90,54 +77,49 @@ a:hover {
 }
 
 .post-preview {
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--ui);
   padding-bottom: 1rem;
 }
 
 .post-preview:last-child {
-  border-bottom: none;
+  border-bottom: 0;
 }
 
 .post-summary {
   margin-bottom: 1rem;
 }
 
-.post-preview h3 {
-  margin-top: 0;
-}
-
 .post-meta {
-  color: var(--muted-color);
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  color: color-mix(in oklab, var(--dark) 60%, var(--light));
+  font-size: .9rem;
+  margin-bottom: .5rem;
 }
 
 .series-label {
-  background-color: var(--code-bg);
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
-  font-size: 0.8em;
+  background: color-mix(in oklab, var(--ui) 15%, var(--light));
+  color: var(--dark);
+  padding: .15em .4em;
+  border-radius: 999px;
+  font-size: .8em;
+  border: 1px solid var(--ui);
 }
 
 .btn {
   display: inline-block;
-  font-family: "Courier New", monospace;
-  font-weight: bold;
+  font-family: inherit;
+  font-weight: 700;
+  color: var(--dark);
+  background: transparent;
+  border: 2px solid var(--dark);
+  padding: .5rem .75rem;
+  border-radius: 8px;
   text-decoration: none;
-  color: var(--link-color);
-  background-color: var(--main-bg-color);
-  border: 1px solid var(--border-color);
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  text-align: center;
 }
 
 .btn:hover {
-  color: var(--main-bg-color);
-  background-color: var(--link-color);
-  border-color: var(--link-color);
+  color: var(--light);
+  background: var(--dark);
+  border-color: var(--dark);
   text-decoration: none;
 }
