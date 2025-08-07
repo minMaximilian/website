@@ -35,6 +35,11 @@ disableKinds = []
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.highlight]
+    noClasses = false
+    guessSyntax = true
+    codeFences = true
+    lineNos = false
 
 [menu]
   [[menu.main]]
