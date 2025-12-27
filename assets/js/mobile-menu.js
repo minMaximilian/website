@@ -1,36 +1,48 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const root = document.documentElement;
-  const header = document.querySelector("header");
-  const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
-  const mobileMenu = document.getElementById("mobile-menu");
+(function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    var toggle = document.getElementById("mobile-menu-toggle");
+    var menu = document.getElementById("mobile-menu");
 
-  function setMenuOpen(isOpen) {
-    if (!header || !mobileMenu || !mobileMenuToggle) return;
-    mobileMenuToggle.classList.toggle("active", isOpen);
-    mobileMenu.classList.toggle("active", isOpen);
-    header.classList.toggle("menu-open", isOpen);
-    root.classList.toggle("menu-open", isOpen);
-  }
+    if (!toggle || !menu) return;
 
-  if (mobileMenuToggle && mobileMenu) {
-    mobileMenuToggle.addEventListener("click", function () {
-      const isOpen = !mobileMenu.classList.contains("active");
-      setMenuOpen(isOpen);
-    });
+    function openMenu() {
+      menu.hidden = false;
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Close menu");
+      toggle.textContent = "✕ Close";
+    }
 
-    document.addEventListener("click", function (event) {
-      if (
-        !mobileMenuToggle.contains(event.target) &&
-        !mobileMenu.contains(event.target)
-      ) {
-        setMenuOpen(false);
+    function closeMenu() {
+      menu.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open menu");
+      toggle.textContent = "☰ Menu";
+    }
+
+    toggle.addEventListener("click", function () {
+      if (menu.hidden) {
+        openMenu();
+      } else {
+        closeMenu();
       }
     });
 
-    mobileMenu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", function () {
-        setMenuOpen(false);
-      });
+    document.addEventListener("click", function (e) {
+      if (!toggle.contains(e.target) && !menu.contains(e.target) && !menu.hidden) {
+        closeMenu();
+      }
     });
-  }
-});
+
+    var links = menu.querySelectorAll("a");
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener("click", closeMenu);
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !menu.hidden) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+  });
+})();

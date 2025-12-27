@@ -1,89 +1,54 @@
 {{ define "main" }}
 {{ if eq .Section "references" }}
+<h1>References</h1>
 {{ .Content }}
 {{ range $category, $links := site.Data.references }}
-<div class="references-section">
-  <h2 id="{{ $category }}">{{ $category | upper }}</h2>
+<section class="references-section" aria-labelledby="ref-{{ $category }}">
+  <h2 id="ref-{{ $category }}">{{ $category | upper }}</h2>
   {{ range $title, $url := $links }}
-  <p class="link">
-    <b><a target="_blank" href="{{ $url }}">{{ $title }}</a></b>{{ partial "ref-links-pill.html" (dict "url" $url) }}
-    <br />
-    <span class="reference-url-small">{{ $url }}</span>
-  </p>
+  <p><strong><a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $title }}</a></strong>{{ partial "ref-links-pill.html" (dict "url" $url) }}<br><span class="reference-url-small">{{ $url }}</span></p>
   {{ end }}
-</div>
+</section>
 {{ end }}
 {{ else if eq .Section "posts" }}
-<div class="page-container">
-  <div class="page-grid">
-    <div class="page-sidebar">
-      <div class="sidebar-sticky">
-        {{ $allSeries := slice }}
-        {{ range .Pages }}
-        {{ if .Params.series }}
-        {{ $allSeries = $allSeries | append .Params.series }}
-        {{ end }}
-        {{ end }}
-        {{ $uniqueSeries := $allSeries | uniq }}
-        {{ if gt (len $uniqueSeries) 0 }}
-        <div class="sidebar-section">
-          <div class="sidebar-label">Filter by Series</div>
-          <div class="sidebar-content">
-            <div class="series-buttons-sidebar">
-              <button class="series-btn active" data-series="all">All Posts</button>
-              {{ range $uniqueSeries }}
-              <button class="series-btn" data-series="{{ . }}">{{ . | title }}</button>
-              {{ end }}
-            </div>
-          </div>
-        </div>
-        {{ end }}
-      </div>
-    </div>
-    <div class="page-content">
-      {{ .Content }}
-      {{ $paginator := .Paginate .Pages 5 }}
-      {{ range $paginator.Pages }}
-      <article class="post-preview" data-series="{{ .Params.series | default " none" }}">
-        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-        <p class="post-meta">
-          {{ .Date.Format "January 2, 2006" }}
-          {{ if .Params.series }}
-          <span class="series-label">Series: {{ .Params.series | title }}</span>
-          {{ end }}
-        </p>
-        <div class="post-summary">{{ .Summary | replaceRE "" "" | plainify | truncate 300 | markdownify }}
-        </div>
-        <a href="{{ .RelPermalink }}" class="read-more btn">Read more →</a>
-      </article>
-      {{ end }}
-      {{ if gt $paginator.TotalPages 1 }}
-      <nav class="pagination">
-        {{ if $paginator.HasPrev }}
-        <a href="{{ $paginator.Prev.URL }}" class="pagination-prev btn">← Previous</a>
-        {{ end }}
-        <span class="pagination-numbers">
-          {{ range $paginator.Pagers }}
-          {{ if eq . $paginator }}
-          <span class="pagination-current btn active">{{ .PageNumber }}</span>
-          {{ else }}
-          <a href="{{ .URL }}" class="pagination-number btn">{{ .PageNumber }}</a>
-          {{ end }}
-          {{ end }}
-        </span>
-        {{ if $paginator.HasNext }}
-        <a href="{{ $paginator.Next.URL }}" class="pagination-next btn">Next →</a>
-        {{ end }}
-      </nav>
-      {{ end }}
-    </div>
+<h1>Posts</h1>
+{{ $allSeries := slice }}
+{{ range .Pages }}{{ if .Params.series }}{{ $allSeries = $allSeries | append .Params.series }}{{ end }}{{ end }}
+{{ $uniqueSeries := $allSeries | uniq }}
+{{ if gt (len $uniqueSeries) 0 }}
+<fieldset class="filter-section">
+  <legend>Filter by Series</legend>
+  <div role="group" aria-label="Series filter buttons">
+    <button class="series-btn active" data-series="all" aria-pressed="true">All Posts</button>
+    {{ range $uniqueSeries }}<button class="series-btn" data-series="{{ . }}" aria-pressed="false">{{ . | title }}</button>{{ end }}
   </div>
-</div>
-{{ else }}
-{{ .Content }}
-{{ range .Pages }}
-<h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-{{ .Summary }}
+</fieldset>
 {{ end }}
+{{ .Content }}
+{{ $paginator := .Paginate .Pages 5 }}
+{{ range $paginator.Pages }}
+<article class="post-preview" data-series="{{ .Params.series | default "none" }}">
+  <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+  <p class="post-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    {{ if .Params.series }}<span class="series-label">Series: {{ .Params.series | title }}</span>{{ end }}
+  </p>
+  <div class="post-summary">{{ .Summary | replaceRE "" "" | plainify | truncate 300 | markdownify }}</div>
+  <p><a href="{{ .RelPermalink }}" class="btn">Read more →</a></p>
+</article>
+{{ end }}
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination" aria-label="Posts pagination">
+  {{ if $paginator.HasPrev }}<a href="{{ $paginator.Prev.URL }}" rel="prev">← Previous</a>{{ end }}
+  <span class="pagination-numbers">
+    {{ range $paginator.Pagers }}{{ if eq . $paginator }}<span class="pagination-current" aria-current="page">{{ .PageNumber }}</span>{{ else }}<a href="{{ .URL }}">{{ .PageNumber }}</a>{{ end }}{{ end }}
+  </span>
+  {{ if $paginator.HasNext }}<a href="{{ $paginator.Next.URL }}" rel="next">Next →</a>{{ end }}
+</nav>
+{{ end }}
+{{ else }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+{{ range .Pages }}<article><h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>{{ .Summary }}</article>{{ end }}
 {{ end }}
 {{ end }}

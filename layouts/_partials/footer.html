@@ -1,11 +1,1 @@
-<p>Copyright {{ now.Format "2006" }}. All rights reserved.</p>
-<p>
-  {{ with .Site.Home.OutputFormats.Get "RSS" }}
-  <a href="{{ .RelPermalink }}" title="RSS Feed">RSS Feed</a>
-  {{ end }}
-  {{ with .Site.GetPage "section" "posts" }}
-  {{ with .OutputFormats.Get "RSS" }}
-  | <a href="{{ .RelPermalink }}" title="Posts RSS Feed">Section RSS</a>
-  {{ end }}
-  {{ end }}
-</p>
+<p>Copyright {{ now.Format "2006" }}. All rights reserved.{{ with .Site.Home.OutputFormats.Get "RSS" }} · <a href="{{ .RelPermalink }}">RSS</a>{{ end }}{{ with .Site.GetPage "section" "posts" }}{{ with .OutputFormats.Get "RSS" }} · <a href="{{ .RelPermalink }}">Posts RSS</a>{{ end }}{{ end }}</p>

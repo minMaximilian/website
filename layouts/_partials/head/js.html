@@ -1,20 +1,11 @@
-{{- $scripts := slice -}}
-{{- $scripts = $scripts | append (resources.Get "js/series-filter.js") -}}
-{{- $scripts = $scripts | append (resources.Get "js/theme-toggle.js") -}}
-{{- $scripts = $scripts | append (resources.Get "js/page-tracker.js") -}}
-{{- $scripts = $scripts | append (resources.Get "js/mobile-menu.js") -}}
-{{- $bundle := $scripts | resources.Concat "js/bundle.js" -}}
-{{- $opts := dict
-"minify" (not hugo.IsDevelopment)
-"sourceMap" (cond hugo.IsDevelopment "external" "")
-"targetPath" "js/bundle.js"
-}}
+{{- $scripts := slice }}
+{{- $scripts = $scripts | append (resources.Get "js/series-filter.js") }}
+{{- $scripts = $scripts | append (resources.Get "js/theme-toggle.js") }}
+{{- $scripts = $scripts | append (resources.Get "js/page-tracker.js") }}
+{{- $scripts = $scripts | append (resources.Get "js/mobile-menu.js") }}
+{{- $bundle := $scripts | resources.Concat "js/bundle.js" }}
+{{- $opts := dict "minify" (not hugo.IsDevelopment) "sourceMap" (cond hugo.IsDevelopment "external" "") "targetPath" "js/bundle.js" }}
 {{- with $bundle | js.Build $opts }}
-{{- if hugo.IsDevelopment }}
-<script defer src="{{ .RelPermalink }}"></script>
-{{- else }}
-{{- with . | fingerprint }}
-<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
-{{- end }}
-{{- end }}
+{{- if hugo.IsDevelopment }}<script defer src="{{ .RelPermalink }}"></script>
+{{- else }}{{- with . | fingerprint }}<script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>{{- end }}{{- end }}
 {{- end }}

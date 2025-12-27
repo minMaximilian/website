@@ -1,135 +1,80 @@
 {{ if and (isset .Params "comments") (isset .Params.comments "id") }}
-<div class="article-content" id="bluesky-comments-container">
+<div id="bluesky-comments-container">
   <h2>Comments</h2>
   <div class="comment-reply-box">
     <p>What do you think? Let me know on Bluesky!</p>
     <div>
-      <a class="read-more btn" id="reply-link" href="#" target="_blank">Reply on Bluesky</a>
-      <a class="read-more btn" id="view-post-link" href="#" target="_blank">View Post</a>
+      <a class="btn" id="reply-link" href="#" target="_blank">Reply on Bluesky</a>
+      <a class="btn" id="view-post-link" href="#" target="_blank">View Post</a>
     </div>
   </div>
   <div id="comments-thread"></div>
-  <div id="no-comments" style="display: none;">No comments found.</div>
   <noscript>You need JavaScript to view the comments.</noscript>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"
-    integrity="sha512-YlctBG9PGZIhh9keoqI3eZkQM9T8QUbiBi7qNYAO/TUEo8jqWX5pLp5+x1cKRQDRzJ/lyGyJ9WUVNIRduxIIFw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function () {
-      const commentList = document.getElementById("comments-thread");
-      const replyLink = document.getElementById("reply-link");
-      const viewPostLink = document.getElementById("view-post-link");
-      commentList.innerHTML = `<div class="comment-loading">Loading comments...</div>`;
-      fetch(
-        `https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=at://{{ .Site.Params.bluesky.handle }}/app.bsky.feed.post/{{ .Params.comments.id }}&depth=10`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          const mainPost = data.thread.post;
-          if (mainPost) {
-            const likeCount = mainPost.likeCount || 0;
-            const repostCount = mainPost.repostCount || 0;
-            const bskyPostUrl = `https://bsky.app/profile/{{ .Site.Params.bluesky.handle }}/post/{{ .Params.comments.id }}`;
-            const statsContainer = document.getElementById("bluesky-post-stats-section");
-            if (statsContainer) {
-              statsContainer.innerHTML = `
-                <div class="sidebar-section">
-                  <div class="sidebar-label">Post Stats</div>
-                  <div class="sidebar-content">
-                    <div class="stat-item">Likes: ${likeCount}</div>
-                    <div class="stat-item">Reposts: ${repostCount}</div>
-                  </div>
-                </div>
-              `;
-            }
-            replyLink.href = `https://bsky.app/intent/compose?text=&replyTo=${mainPost.uri}`;
-            viewPostLink.href = bskyPostUrl;
-          }
-          const replies = data.thread.replies || [];
-          if (replies.length === 0) {
-            commentList.innerHTML = `<div class="no-comments-found">No comments yet. Be the first to reply on Bluesky!</div>`;
-            return;
-          }
-          replies.sort(
-            (a, b) =>
-              new Date(a.post.record.createdAt) -
-              new Date(b.post.record.createdAt)
-          );
-          commentList.innerHTML = "";
-          const renderComments = (comments, parentElement) => {
-            comments.forEach((reply) => {
-              const author = reply.post.author;
-              let content = reply.post.record.text;
-              const createdAt = new Date(
-                reply.post.record.createdAt
-              ).toLocaleString();
-              const replyCount = Number(reply.post.replyCount) || 0;
-              const repostCount = Number(reply.post.repostCount) || 0;
-              const likeCount = Number(reply.post.likeCount) || 0;
-              const facets = reply.post.record.facets || [];
-              facets.sort((a, b) => a.index.byteStart - b.index.byteStart);
-              let offset = 0;
-              facets.forEach((facet) => {
-                const start = facet.index.byteStart + offset;
-                const end = facet.index.byteEnd + offset;
-                const originalText = content.slice(start, end);
-                let replacementText = originalText;
-                facet.features.forEach((feature) => {
-                  if (feature.$type === "app.bsky.richtext.facet#link") {
-                    replacementText = `<a class="link" href="${feature.uri}" target="_blank" rel="noopener noreferrer">${originalText}</a>`;
-                  } else if (
-                    feature.$type === "app.bsky.richtext.facet#mention"
-                  ) {
-                    replacementText = `<a class="link" href="https://bsky.app/profile/${feature.did}" target="_blank" rel="noopener noreferrer">${originalText}</a>`;
-                  }
-                });
-                content =
-                  content.slice(0, start) +
-                  replacementText +
-                  content.slice(end);
-                offset += replacementText.length - originalText.length;
-              });
-              const safeContent = DOMPurify.sanitize(content, {
-                USE_PROFILES: { html: true },
-              });
-              const commentHtml = `
-                  <div class="comment-container">
-                      <div class="comment-thread-line-container">
-                        <img src="${author.avatar}" alt="${author.displayName}'s avatar" class="comment-avatar">
-                        <div class="comment-thread-line"></div>
-                      </div>
-                      <div class="comment-details">
-                          <div class="comment-header">
-                              <a href="https://bsky.app/profile/${author.did}" target="_blank" class="username-link">${author.displayName}</a>
-                              <span class="comment-handle">@${author.handle}</span>
-                              <span class="timestamp-separator">&#183;</span>
-                              <span class="comment-timestamp">${createdAt}</span>
-                          </div>
-                          <div class="comment-text">${safeContent.replace(/\n/g, '<br>')}</div>
-                      </div>
-                      <div class="comment-meta">
-                        <span class="meta-item" title="Likes">${likeCount} ❤</span>
-                      </div>
-                  </div>`;
-              const commentElement = document.createElement("div");
-              commentElement.className = "comment-element";
-              commentElement.innerHTML = commentHtml;
-              parentElement.appendChild(commentElement);
-              if (reply.replies && reply.replies.length > 0) {
-                const childCommentsContainer = document.createElement("div");
-                childCommentsContainer.className = "child-comments";
-                commentElement.appendChild(childCommentsContainer);
-                renderComments(reply.replies, childCommentsContainer);
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js" integrity="sha512-YlctBG9PGZIhh9keoqI3eZkQM9T8QUbiBi7qNYAO/TUEo8jqWX5pLp5+x1cKRQDRzJ/lyGyJ9WUVNIRduxIIFw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+  (function(){
+    var list = document.getElementById("comments-thread");
+    var reply = document.getElementById("reply-link");
+    var view = document.getElementById("view-post-link");
+    list.innerHTML = '<div class="comment-loading">Loading comments...</div>';
+    fetch("https://public.api.bsky.app/xrpc/app.bsky.feed.getPostThread?uri=at://{{ .Site.Params.bluesky.handle }}/app.bsky.feed.post/{{ .Params.comments.id }}&depth=10")
+      .then(function(r){return r.json()})
+      .then(function(data){
+        var post = data.thread.post;
+        if(post){
+          reply.href = "https://bsky.app/intent/compose?text=&replyTo=" + post.uri;
+          view.href = "https://bsky.app/profile/{{ .Site.Params.bluesky.handle }}/post/{{ .Params.comments.id }}";
+        }
+        var replies = data.thread.replies || [];
+        if(replies.length === 0){
+          list.innerHTML = '<div class="no-comments-found">No comments yet. Be the first to reply on Bluesky!</div>';
+          return;
+        }
+        replies.sort(function(a,b){return new Date(a.post.record.createdAt) - new Date(b.post.record.createdAt)});
+        list.innerHTML = "";
+        function render(comments, parent){
+          for(var i=0;i<comments.length;i++){
+            var r = comments[i];
+            var a = r.post.author;
+            var txt = r.post.record.text;
+            var time = new Date(r.post.record.createdAt).toLocaleString();
+            var likes = Number(r.post.likeCount) || 0;
+            var facets = r.post.record.facets || [];
+            facets.sort(function(x,y){return x.index.byteStart - y.index.byteStart});
+            var off = 0;
+            for(var j=0;j<facets.length;j++){
+              var f = facets[j];
+              var s = f.index.byteStart + off;
+              var e = f.index.byteEnd + off;
+              var orig = txt.slice(s,e);
+              var repl = orig;
+              for(var k=0;k<f.features.length;k++){
+                var ft = f.features[k];
+                if(ft.$type === "app.bsky.richtext.facet#link") repl = '<a href="'+ft.uri+'" target="_blank" rel="noopener noreferrer">'+orig+'</a>';
+                else if(ft.$type === "app.bsky.richtext.facet#mention") repl = '<a href="https://bsky.app/profile/'+ft.did+'" target="_blank" rel="noopener noreferrer">'+orig+'</a>';
               }
-            });
-          };
-          renderComments(replies, commentList);
-        })
-        .catch((error) => {
-          commentList.innerHTML = `<div class="comment-error">Error loading comments.</div>`;
-          console.error("Error fetching Bluesky comments:", error);
-        });
-    });
+              txt = txt.slice(0,s) + repl + txt.slice(e);
+              off += repl.length - orig.length;
+            }
+            var safe = DOMPurify.sanitize(txt,{USE_PROFILES:{html:true}});
+            var el = document.createElement("div");
+            el.className = "comment-element";
+            el.innerHTML = '<div class="comment-container"><img src="'+a.avatar+'" alt="" class="comment-avatar"><div class="comment-details"><div class="comment-header"><a href="https://bsky.app/profile/'+a.did+'" target="_blank">'+a.displayName+'</a> @'+a.handle+' · '+time+'</div><div class="comment-text">'+safe.replace(/\n/g,'<br>')+'</div></div><div class="comment-meta">'+likes+' likes</div></div>';
+            parent.appendChild(el);
+            if(r.replies && r.replies.length > 0){
+              var ch = document.createElement("div");
+              ch.className = "child-comments";
+              el.appendChild(ch);
+              render(r.replies, ch);
+            }
+          }
+        }
+        render(replies, list);
+      })
+      .catch(function(){
+        list.innerHTML = '<div class="comment-error">Error loading comments.</div>';
+      });
+  })();
   </script>
 </div>
 {{ end }}

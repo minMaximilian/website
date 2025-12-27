@@ -2,24 +2,19 @@
 {{ .Content }}
 {{ $posts := where site.RegularPages "Section" "posts" }}
 {{ if $posts }}
+<hr>
 <h2>Latest Posts</h2>
 {{ range first 2 $posts }}
 <article class="post-preview">
   <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
   <p class="post-meta">
-    {{ .Date.Format "January 2, 2006" }}
-    {{ if .Params.series }}
-    <span class="series-label">Series: {{ .Params.series | title }}</span>
-    {{ end }}
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    {{ if .Params.series }}<span class="series-label">Series: {{ .Params.series | title }}</span>{{ end }}
   </p>
-  <div class="post-summary">
-    {{ .Summary }}
-  </div>
-  <a href="{{ .RelPermalink }}" class="read-more btn">Read more →</a>
+  <div class="post-summary">{{ .Summary }}</div>
+  <p><a href="{{ .RelPermalink }}" class="btn">Read more →</a></p>
 </article>
 {{ end }}
-{{ if gt (len $posts) 1 }}
-<p><a href="/posts/" class="view-all btn">View all posts →</a></p>
-{{ end }}
+{{ if gt (len $posts) 2 }}<p><a href="/posts/" class="btn">View all posts →</a></p>{{ end }}
 {{ end }}
 {{ end }}

@@ -1,34 +1,17 @@
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-{{- partial "head/css.html" . -}}
-{{- partial "head/js.html" . -}}
-<title>
-  {{- if .IsHome -}}
-  {{- .Site.Title -}}
-  {{- else -}}
-  {{- printf "%s | %s" .Title site.Title -}}
-  {{- end -}}
-</title>
-{{ if .Summary }}
-<meta name="description" content="{{ .Summary | plainify | truncate 160 }}">
-{{ else if .IsHome }}
-<meta name="description" content="{{ site.Params.description | default " Personal website and blog" }}">
-{{ else }}
-<meta name="description" content="{{ .Title }} - {{ site.Title }}">
-{{ end }}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ partial "head/css.html" . }}
+{{ partial "head/js.html" . }}
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+{{ if .Summary }}<meta name="description" content="{{ .Summary | plainify | truncate 160 }}">
+{{ else if .IsHome }}<meta name="description" content="{{ site.Params.description | default "Personal website and blog" }}">
+{{ else }}<meta name="description" content="{{ .Title }} - {{ site.Title }}">{{ end }}
 <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{ if .Summary }}
-<meta property="og:description" content="{{ .Summary | plainify | truncate 160 }}">
-{{ end }}
+{{ if .Summary }}<meta property="og:description" content="{{ .Summary | plainify | truncate 160 }}">{{ end }}
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
-{{ if .Summary }}
-<meta name="twitter:description" content="{{ .Summary | plainify | truncate 160 }}">
+{{ if .Summary }}<meta name="twitter:description" content="{{ .Summary | plainify | truncate 160 }}">{{ end }}
+{{ range .AlternativeOutputFormats }}{{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
 {{ end }}
-{{ range .AlternativeOutputFormats -}}
-{{ printf `
-<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
-{{ end -}}

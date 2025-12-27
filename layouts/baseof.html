@@ -1,27 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
-
 <head>
   {{ partial "head.html" . }}
 </head>
-
-<body class="{{ if .IsHome }}home{{ else }}page{{ end }}">
-  <svg style="position: absolute; width: 0; height: 0;">
-    <filter id="grainy">
-      <feTurbulence type="turbulence" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch" />
-      <feColorMatrix type="saturate" values="0" />
-    </filter>
-  </svg>
-  <header>
+<body>
+  <header role="banner">
     {{ partial "header.html" . }}
   </header>
-  <main>
-    {{ block "main" . }}
-    {{ end }}
+  <main id="main-content" role="main">
+    {{ block "main" . }}{{ end }}
   </main>
-  <footer>
+  <footer role="contentinfo">
     {{ partial "footer.html" . }}
   </footer>
 </body>
-
 </html>
