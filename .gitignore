@@ -52,6 +52,9 @@ Thumbs.db
 .env.test.local
 .env.production.local
 
+# direnv
+.direnv/
+
 # Backup files
 *.bak
 *.backup

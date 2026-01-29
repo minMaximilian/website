@@ -5,13 +5,13 @@ draft = false
 description = 'Personal hobby website of a programmer exploring technology. Collection of projects, blog posts, and curated references.'
 +++
 
-I'm Max
+## I'm Max
 
-Software should cut through signal and noise, not create it.
+This blog is nothing special, it serves as a way for me to get better at communication, a point of reflection and as a public log. You can comment via Bluesky on any of the posts.
 
 ## Work
 
-A software engineer in Cork, Ireland. I currently work as a Data Privacy Engineer at [Hubspot](https://www.hubspot.com/). I helped ship:
+A software engineer in Cork, Ireland. I currently work on Product Approvals and Data Privacy Teams at [Hubspot](https://www.hubspot.com/). I helped ship:
 
 - [Sensitive Data](https://knowledge.hubspot.com/properties/store-sensitive-data)
 - [Privacy Pages and Management](https://knowledge.hubspot.com/privacy-and-consent/manage-data-privacy-requests)
