@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{ .Content }}
-{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ $posts := (where site.RegularPages "Section" "posts").ByDate.Reverse }}
 {{ if $posts }}
 <hr>
 <h2>Latest Posts</h2>

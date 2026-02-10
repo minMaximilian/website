@@ -33,7 +33,7 @@
     <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
     {{ if .Params.series }}<span class="series-label">Series: {{ .Params.series | title }}</span>{{ end }}
   </p>
-  <div class="post-summary">{{ .Summary | replaceRE "" "" | plainify | truncate 300 | markdownify }}</div>
+  <div class="post-summary">{{ .Summary | plainify | truncate 300 }}</div>
   <p><a href="{{ .RelPermalink }}" class="btn">Read more →</a></p>
 </article>
 {{ end }}

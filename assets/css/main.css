@@ -122,6 +122,8 @@ header h1 a:hover { text-decoration: underline; }
   color: var(--bg);
 }
 
+.desktop-nav a:visited { color: var(--text); }
+
 .desktop-nav a[aria-current="page"] {
   background: var(--text);
   color: var(--bg);
@@ -156,6 +158,8 @@ header h1 a:hover { text-decoration: underline; }
   color: var(--bg);
 }
 
+.mobile-menu a:visited { color: var(--text); }
+
 .mobile-menu a[aria-current="page"] {
   background: var(--text);
   color: var(--bg);
@@ -172,7 +176,7 @@ header h1 a:hover { text-decoration: underline; }
 a { color: var(--link); }
 a:visited { color: var(--link-visited); }
 a:hover, a:focus { color: var(--link-hover); }
-a:focus { outline: 2px solid var(--highlight); outline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--highlight); outline-offset: 2px; }
 
 h1, h2, h3, h4, h5, h6 { 
   font-family: 'VT323', monospace;
@@ -247,15 +251,16 @@ th { background: var(--surface); }
 }
 
 .btn:hover, .btn:focus { background: var(--text); color: var(--bg); }
-.btn:focus { outline: 2px solid var(--highlight); outline-offset: 2px; }
+.btn:focus-visible { outline: 2px solid var(--highlight); outline-offset: 2px; }
+.btn:visited { color: var(--text); }
 
-.post-preview, article {
+.post-preview {
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px dashed var(--border);
 }
 
-.post-preview:last-child, article:last-child { border-bottom: none; }
+.post-preview:last-child { border-bottom: none; }
 .post-preview h2, .post-preview h3 { margin-top: 0; }
 .post-meta { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
 .post-summary { margin-bottom: 10px; }
@@ -304,7 +309,7 @@ th { background: var(--surface); }
   color: var(--bg);
 }
 
-.series-btn:focus { outline: 2px solid var(--highlight); outline-offset: 1px; }
+.series-btn:focus-visible { outline: 2px solid var(--highlight); outline-offset: 1px; }
 
 .references-section { margin-bottom: 30px; }
 .references-section h2 { border-bottom: 1px solid var(--border); padding-bottom: 5px; }

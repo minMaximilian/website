@@ -4,8 +4,8 @@
   <div class="comment-reply-box">
     <p>What do you think? Let me know on Bluesky!</p>
     <div>
-      <a class="btn" id="reply-link" href="#" target="_blank">Reply on Bluesky</a>
-      <a class="btn" id="view-post-link" href="#" target="_blank">View Post</a>
+      <a class="btn" id="reply-link" href="#" target="_blank" rel="noopener noreferrer">Reply on Bluesky</a>
+      <a class="btn" id="view-post-link" href="#" target="_blank" rel="noopener noreferrer">View Post</a>
     </div>
   </div>
   <div id="comments-thread"></div>
@@ -59,7 +59,35 @@
             var safe = DOMPurify.sanitize(txt,{USE_PROFILES:{html:true}});
             var el = document.createElement("div");
             el.className = "comment-element";
-            el.innerHTML = '<div class="comment-container"><img src="'+a.avatar+'" alt="" class="comment-avatar"><div class="comment-details"><div class="comment-header"><a href="https://bsky.app/profile/'+a.did+'" target="_blank">'+a.displayName+'</a> @'+a.handle+' · '+time+'</div><div class="comment-text">'+safe.replace(/\n/g,'<br>')+'</div></div><div class="comment-meta">'+likes+' likes</div></div>';
+            var container = document.createElement("div");
+            container.className = "comment-container";
+            var img = document.createElement("img");
+            img.src = a.avatar;
+            img.alt = "";
+            img.className = "comment-avatar";
+            container.appendChild(img);
+            var details = document.createElement("div");
+            details.className = "comment-details";
+            var hdr = document.createElement("div");
+            hdr.className = "comment-header";
+            var authorLink = document.createElement("a");
+            authorLink.href = "https://bsky.app/profile/" + a.did;
+            authorLink.target = "_blank";
+            authorLink.rel = "noopener noreferrer";
+            authorLink.textContent = a.displayName;
+            hdr.appendChild(authorLink);
+            hdr.appendChild(document.createTextNode(" @" + a.handle + " \u00b7 " + time));
+            details.appendChild(hdr);
+            var textDiv = document.createElement("div");
+            textDiv.className = "comment-text";
+            textDiv.innerHTML = safe.replace(/\n/g,"<br>");
+            details.appendChild(textDiv);
+            container.appendChild(details);
+            var meta = document.createElement("div");
+            meta.className = "comment-meta";
+            meta.textContent = likes + " likes";
+            container.appendChild(meta);
+            el.appendChild(container);
             parent.appendChild(el);
             if(r.replies && r.replies.length > 0){
               var ch = document.createElement("div");
